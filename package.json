@@ -1,0 +1,28 @@
+{
+  "name": "@peptidesdirect/peptide-reconstitution-calculator",
+  "version": "1.0.0",
+  "description": "Self-contained, dependency-free peptide reconstitution and syringe-dose calculator. Embeddable via a single HTML file, no build step required.",
+  "keywords": [
+    "peptide",
+    "reconstitution",
+    "calculator",
+    "syringe",
+    "dosing-math",
+    "bacteriostatic-water",
+    "biohacking"
+  ],
+  "license": "MIT",
+  "homepage": "https://calc.peptidesdirect.io",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OWNER/peptide-reconstitution-calculator.git"
+  },
+  "files": [
+    "index.html",
+    "peptides.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "main": "index.html",
+  "private": false
+}

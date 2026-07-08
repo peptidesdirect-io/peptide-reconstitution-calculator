@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Peptide Reconstitution Calculator</title>
+<!--
+  Self-contained, dependency-free peptide reconstitution + syringe-dose calculator.
+  Open source (MIT), embeddable anywhere via <iframe>. Maintained by peptidesdirect.io.
+  Model: U-100 insulin syringe, 100 units = 1 ml, 1 unit = 0.01 ml.
+  Research/education reference only. Not medical advice. Dosing figures describe
+  handling math, not a recommendation for use in humans or animals.
+-->
+<style>
+  :root {
+    --bg: #ffffff; --fg: #0f172a; --muted: #64748b; --line: #e2e8f0;
+    --card: #ffffff; --accent: #0f766e; --accent-dark: #0b5b54; --amber: #c67b12;
+    --liq-top: #2bb3a6; --liq-bot: #0f766e; --radius: 12px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#0b1220; --fg:#e5e9f0; --muted:#94a3b8; --line:#233046; --card:#111a2b; }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    padding: 16px;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; }
+  .grid { display: grid; gap: 16px; }
+  @media (min-width: 760px) { .grid { grid-template-columns: 1fr 1fr; } }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
+  h2 { font-size: 15px; margin: 0 0 12px; }
+  label { display: block; font-size: 13px; color: var(--muted); margin: 0 0 6px; }
+  .field { margin-bottom: 16px; }
+  select, input {
+    width: 100%; padding: 9px 10px; font-size: 15px; color: var(--fg);
+    background: var(--bg); border: 1px solid var(--line); border-radius: 8px;
+  }
+  input[type=number] { appearance: textfield; }
+  .dose-row { display: flex; gap: 8px; }
+  .dose-row input { flex: 1; }
+  .unit-toggle { display: flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; flex-shrink: 0; }
+  .unit-toggle button { border: 0; background: var(--bg); color: var(--muted); padding: 0 12px; font: inherit; font-weight: 600; cursor: pointer; }
+  .unit-toggle button[aria-pressed=true] { background: var(--accent); color: #fff; }
+  .hint { font-size: 12px; color: var(--muted); margin: 6px 0 0; }
+  .diluent { font-size: 12px; color: var(--accent); margin: 6px 0 0; }
+  .study-ref { font-size: 12px; color: var(--muted); margin: 6px 0 0; }
+  .study-ref a { color: var(--accent); font-weight: 600; text-decoration: none; }
+  .study-ref a:hover { text-decoration: underline; }
+  .syr-box { border: 1px solid var(--line); border-radius: 8px; background: #fbfaf7; padding: 14px 8px 4px; }
+  @media (prefers-color-scheme: dark) { .syr-box { background: #0e1626; } }
+  svg { display: block; width: 100%; touch-action: none; user-select: none; cursor: pointer; }
+  .adjust { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 10px; }
+  .adjust .btns { display: flex; align-items: center; gap: 6px; }
+  .stepbtn { width: 34px; height: 34px; border: 1px solid var(--line); background: var(--bg); color: var(--fg); border-radius: 8px; font-size: 18px; cursor: pointer; }
+  .stepbtn:disabled { opacity: .4; cursor: default; }
+  .uval { min-width: 56px; text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; }
+  dl.readouts { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 16px 0 0; }
+  @media (min-width: 480px) { dl.readouts { grid-template-columns: repeat(4, 1fr); } }
+  dl.readouts dt { font-size: 12px; color: var(--muted); }
+  dl.readouts dd { margin: 3px 0 0; font-weight: 700; font-variant-numeric: tabular-nums; }
+  dl.readouts dd.hi { color: var(--accent); font-size: 18px; }
+  .blend { border-top: 1px solid var(--line); margin-top: 14px; padding-top: 12px; }
+  .blend .cap { font-size: 11px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; }
+  .blend .row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .blend .sw { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+  .blend .nm { width: 84px; font-size: 13px; font-weight: 600; flex-shrink: 0; }
+  .blend .bar { flex: 1; height: 6px; background: var(--line); border-radius: 999px; overflow: hidden; }
+  .blend .bar span { display: block; height: 100%; border-radius: 999px; }
+  .blend .amt { width: 80px; text-align: right; font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .foot { border-top: 1px solid var(--line); margin-top: 14px; padding-top: 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .foot .cap-note { font-size: 12px; color: var(--muted); }
+  .brand { font-size: 12px; color: var(--muted); text-decoration: none; }
+  .brand b { color: var(--accent); }
+  .disc { font-size: 11px; color: var(--muted); margin: 12px 0 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="grid">
+    <!-- Inputs -->
+    <section class="card">
+      <h2>Inputs</h2>
+      <div class="field">
+        <label for="peptide">Peptide (optional)</label>
+        <select id="peptide"><option value="__manual__">Manual entry</option></select>
+        <p class="diluent" id="diluent" hidden></p>
+        <p class="study-ref" id="studyRef" hidden></p>
+      </div>
+      <div class="field">
+        <label for="vial">Peptide in vial (mg)</label>
+        <input id="vial" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 10" />
+      </div>
+      <div class="field">
+        <label for="water">Bacteriostatic water added (ml)</label>
+        <input id="water" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 2" value="2" />
+      </div>
+      <div class="field" style="margin-bottom:0">
+        <label for="dose">Target dose per draw</label>
+        <div class="dose-row">
+          <input id="dose" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 250" />
+          <div class="unit-toggle" role="group" aria-label="Dose unit">
+            <button type="button" id="u-mcg" aria-pressed="true">mcg</button>
+            <button type="button" id="u-mg" aria-pressed="false">mg</button>
+          </div>
+        </div>
+        <p class="hint">The amber marker shows where to draw for this dose.</p>
+      </div>
+    </section>
+
+    <!-- Syringe + results -->
+    <section class="card">
+      <h2 style="display:flex;justify-content:space-between;align-items:center">
+        Draw on a U-100 syringe
+        <span id="unit-chip" style="font-size:12px;font-weight:600;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:3px 10px">0 U</span>
+      </h2>
+      <div class="syr-box">
+        <svg id="syr" viewBox="0 0 900 210" role="group" aria-label="Interactive syringe">
+          <defs>
+            <linearGradient id="liq" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#2bb3a6"/><stop offset="1" stop-color="#0f766e"/>
+            </linearGradient>
+            <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#000" stop-opacity=".05"/>
+              <stop offset=".5" stop-color="#fff" stop-opacity=".55"/>
+              <stop offset="1" stop-color="#000" stop-opacity=".08"/>
+            </linearGradient>
+          </defs>
+          <!-- needle -->
+          <rect x="18" y="98" width="72" height="4" rx="2" fill="#aeb4c0"/>
+          <rect x="86" y="92" width="16" height="16" rx="3" fill="#c4c8d0"/>
+          <!-- barrel -->
+          <rect x="102" y="72" width="700" height="60" rx="12" fill="#fdfdfc" stroke="#c9cdd6" stroke-width="1.5"/>
+          <rect id="liquid" x="104" y="74" width="0" height="56" rx="10" fill="url(#liq)"/>
+          <rect x="102" y="72" width="700" height="60" rx="12" fill="url(#glass)" pointer-events="none"/>
+          <g id="ticks" pointer-events="none"></g>
+          <g id="target" pointer-events="none"></g>
+          <!-- plunger -->
+          <g id="plunger" tabindex="0" role="slider" aria-label="Plunger position (units)" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" style="cursor:grab">
+            <rect id="rod" x="104" y="95" width="0" height="14" fill="#cfd3da"/>
+            <rect id="stopper" x="104" y="70" width="15" height="64" rx="4" fill="#3aa79b" stroke="#0f766e"/>
+            <rect id="thumb" x="794" y="62" width="14" height="80" rx="5" fill="#3aa79b"/>
+          </g>
+        </svg>
+      </div>
+      <div class="adjust">
+        <span class="hint">Drag the plunger, use arrow keys, or the buttons.</span>
+        <div class="btns">
+          <button class="stepbtn" id="minus" aria-label="minus one unit">&minus;</button>
+          <span class="uval"><span id="uval">0</span> U</span>
+          <button class="stepbtn" id="plus" aria-label="plus one unit">+</button>
+        </div>
+      </div>
+
+      <dl class="readouts">
+        <div><dt>Amount drawn</dt><dd class="hi" id="r-amount">-</dd></div>
+        <div><dt>Volume</dt><dd id="r-vol">-</dd></div>
+        <div><dt>Units</dt><dd id="r-units">0 U</dd></div>
+        <div><dt>Concentration</dt><dd id="r-conc">-</dd></div>
+      </dl>
+
+      <div class="blend" id="blend" hidden><p class="cap">Per component in this draw</p><div id="blend-rows"></div></div>
+
+      <div class="foot">
+        <span class="cap-note"><span id="doses">-</span> full doses per vial</span>
+        <a class="brand" id="brand" href="https://peptidesdirect.io/research/reconstitution-calculator" target="_blank" rel="noopener">Powered by <b>peptidesdirect.io</b></a>
+      </div>
+      <p class="disc">Research and education reference only. U-100 syringe math (100 units = 1 ml). Not medical advice; not a dosing recommendation for humans or animals.</p>
+    </section>
+  </div>
+</div>
+
+<script>
+/* ---- Reference presets: name, vial mg options, diluent/pH hint, blend recipe.
+   Vial sizes are common research conventions and are fully editable by the user.
+   pH/diluent hints follow drug-class formulation (BAC water ~pH 5.7 neutral;
+   amylin analogs acidic ~pH 4; IGF-1 analogs acetate-buffered acidic). ---- */
+/* studyDose/studyNote: short reference-range summaries of doses used in
+   PUBLISHED STUDIES, derived from peptidesdirect.io's sourced dataset
+   (research-doses.json). Reference only, never a recommendation; values
+   are not altered from the underlying dataset, only shortened for display.
+   Omitted for blends (no single-peptide study record). */
+var PEPTIDES = [
+  { slug:"bpc-157", name:"BPC-157", mg:[5,10], diluent:"Bacteriostatic water (neutral)", studyDose:"10 pg/kg to 2 mg/kg (animal)", studyNote:"No established human protocol" },
+  { slug:"tb-500", name:"TB-500", mg:[5,10], diluent:"Bacteriostatic water (neutral)", studyDose:"1.6 mg/kg/day to 6 mg/kg (animal)", studyNote:"No established human protocol" },
+  { slug:"ghk-cu", name:"GHK-Cu", mg:[50,100], diluent:"Bacteriostatic water (do not acidify; blue colour is normal)", studyDose:"0.2 to 20 mg/kg/day (animal)", studyNote:"No established human protocol" },
+  { slug:"ipamorelin", name:"Ipamorelin", mg:[5,10], diluent:"Bacteriostatic water (neutral)", studyDose:"1.6 mcg/kg to 1.6 mg/kg/day (animal)", studyNote:"No established human protocol" },
+  { slug:"cjc-1295", name:"CJC-1295 (no DAC)", mg:[5,10], diluent:"Bacteriostatic water (neutral)", studyDose:"30 to 90 mcg/kg (human trials)", studyNote:"No established human protocol" },
+  { slug:"sermorelin", name:"Sermorelin", mg:[5], diluent:"Bacteriostatic water (neutral)", studyDose:"1 to 60 mcg/kg/day (human trials)", studyNote:"Approved human dose exists" },
+  { slug:"tesamorelin", name:"Tesamorelin", mg:[5,10], diluent:"Bacteriostatic water (neutral)", studyDose:"2 mg/day to 600 mcg/kg (animal + human)", studyNote:"Approved human dose exists" },
+  { slug:"semax", name:"Semax", mg:[10,30], diluent:"Bacteriostatic water (neutral)", studyDose:"0.045 to 0.25 mg/kg (animal)", studyNote:"No established human protocol" },
+  { slug:"selank", name:"Selank", mg:[10], diluent:"Bacteriostatic water (neutral)", studyDose:"0.3 mg/kg (animal)", studyNote:"No established human protocol" },
+  { slug:"mots-c", name:"MOTS-c", mg:[10], diluent:"Bacteriostatic water (neutral)", studyDose:"0.5 to 15 mg/kg (animal)", studyNote:"No established human protocol" },
+  { slug:"epitalon", name:"Epitalon", mg:[10,50], diluent:"Bacteriostatic water (neutral)", studyDose:"0.4 to 40 mcg/kg (animal)", studyNote:"No established human protocol" },
+  { slug:"nad-plus", name:"NAD+", mg:[500,1000], diluent:"Bacteriostatic water (neutral)", studyDose:"5 mg/kg to 750 mg total (animal + human)", studyNote:"No established human protocol" },
+  { slug:"ss-31", name:"SS-31", mg:[10,50], diluent:"Bacteriostatic water (neutral)", studyDose:"0.005 to 0.25 mg/kg/h (human trials)", studyNote:"No established human protocol" },
+  { slug:"kpv", name:"KPV", mg:[10], diluent:"Bacteriostatic water (neutral)", studyDose:"16 mcg/kg to 2.5 mg/kg (animal)", studyNote:"No established human protocol" },
+  { slug:"ll-37", name:"LL-37", mg:[5], diluent:"Bacteriostatic water (neutral)", studyDose:"under 10 mcg/mL to 3.2 mg/mL (in vitro / human topical)", studyNote:"No established human protocol" },
+  { slug:"thymosin-alpha-1", name:"Thymosin Alpha-1", mg:[5,10], diluent:"Bacteriostatic water (neutral)", studyDose:"900 mcg/m2 to 1.6 mg per dose (human trials)", studyNote:"Approved human dose exists" },
+  { slug:"thymalin", name:"Thymalin", mg:[10], diluent:"Bacteriostatic water (neutral)", studyDose:"10 mg/day (human trials)", studyNote:"No established human protocol" },
+  { slug:"dsip", name:"DSIP", mg:[5,10], diluent:"Bacteriostatic water (neutral)", studyDose:"21 mcg/kg to 2 mg absolute (animal + human)", studyNote:"No established human protocol" },
+  { slug:"melanotan-2", name:"Melanotan-2", mg:[10], diluent:"Bacteriostatic water (neutral)", studyDose:"0.01 mg/kg to 6 mg (human trials)", studyNote:"No established human protocol" },
+  { slug:"retatrutide", name:"Retatrutide", mg:[5,10,15], diluent:"Bacteriostatic water, near-neutral (test water pH; acidic water is the top cause of a milky vial)", studyDose:"0.5 to 12 mg/week (human trials)", studyNote:"No established human protocol" },
+  { slug:"cagrilintide", name:"Cagrilintide", mg:[5,10], diluent:"Acetic-acid water then top up with bacteriostatic water (amylin analog, acidic ~pH 4)", studyDose:"0.16 to 4.5 mg/week (human trials)", studyNote:"No established human protocol" },
+  { slug:"aod-9604", name:"AOD-9604", mg:[5], diluent:"Bacteriostatic water (neutral)", studyDose:"0.25 mg per knee to 0.5 mg/kg/day (animal)", studyNote:"No established human protocol" },
+  { slug:"igf-1-lr3", name:"IGF-1 LR3", mg:[1], diluent:"Dilute acetic acid, then bacteriostatic water (acetate-buffered, acidic ~pH 3-4)", studyDose:"0.18 to 2.5 mg/kg/day (animal)", studyNote:"No established human protocol" },
+  { slug:"glow", name:"GLOW (GHK-Cu / BPC-157 / TB-500)", mg:[70], diluent:"Bacteriostatic water (do not acidify)", blend:{70:[["GHK-Cu",50],["BPC-157",10],["TB-500",10]]} },
+  { slug:"klow", name:"KLOW (GHK-Cu / BPC-157 / TB-500 / KPV)", mg:[80], diluent:"Bacteriostatic water (do not acidify)", blend:{80:[["GHK-Cu",50],["BPC-157",10],["TB-500",10],["KPV",10]]} },
+  { slug:"cjc-1295-ipamorelin-mix", name:"CJC-1295 / Ipamorelin", mg:[10], diluent:"Bacteriostatic water (neutral)", blend:{10:[["CJC-1295",5],["Ipamorelin",5]]} },
+  { slug:"bpc-157-tb-500-mix", name:"BPC-157 / TB-500", mg:[10,20], diluent:"Bacteriostatic water (neutral)", blend:{10:[["BPC-157",5],["TB-500",5]],20:[["BPC-157",10],["TB-500",10]]} },
+  { slug:"semax-selank-mix", name:"Semax / Selank", mg:[20], diluent:"Bacteriostatic water (neutral)", blend:{20:[["Semax",10],["Selank",10]]} }
+];
+var SWATCHES = ["#0f766e","#c67b12","#3b6db3","#8a4fbf"];
+
+/* ---- Pure syringe math (ported from peptidesdirect.io lib/syringe-math.ts) ---- */
+function clampUnits(u, max){ if(isNaN(u)) return 0; return Math.max(0, Math.min(max, Math.round(u))); }
+function concentration(vialMg, waterMl){ return (vialMg>0 && waterMl>0) ? vialMg/waterMl : 0; }
+function maxUnitsForWater(waterMl){ var w = waterMl>0?waterMl:1; return Math.max(1, Math.min(100, Math.round(w*100))); }
+function unitsToMl(u){ return u/100; }
+function amountAtUnits(u, conc){ var mg = unitsToMl(u)*conc; return { mg:mg, mcg:mg*1000 }; }
+function targetUnits(doseMg, conc){ return (conc>0 && doseMg>0) ? (doseMg/conc)*100 : null; }
+function dosesPerVial(vialMg, doseMg){ return (doseMg>0 && vialMg>0) ? Math.floor(vialMg/doseMg) : null; }
+function blendPartsForVial(map, vialMg){
+  if(!(vialMg>0)) return null;
+  if(map[vialMg]) return map[vialMg].map(function(p){ return { name:p[0], mg:p[1] }; });
+  var base = Math.min.apply(null, Object.keys(map).map(Number).filter(function(k){ return k>0; }));
+  if(!isFinite(base)) return null;
+  var f = vialMg/base;
+  return map[base].map(function(p){ return { name:p[0], mg:p[1]*f }; });
+}
+
+/* ---- Geometry (viewBox 0 0 900 210) ---- */
+var X0=104, XMAX=792, SPAN=XMAX-X0, ROD_LEN=690, STOPPER_W=15, BARREL_Y=72, BARREL_H=60;
+var rodCy = BARREL_Y + BARREL_H/2;
+
+/* ---- State ---- */
+var state = { vial:0, water:"2", dose:0, doseUnit:"mcg", rawUnits:0, autoFollow:true, dragging:false, preset:null };
+
+var $ = function(id){ return document.getElementById(id); };
+var fmt = function(v,d){ return new Intl.NumberFormat(undefined,{ maximumFractionDigits:d, minimumFractionDigits:0 }).format(v); };
+
+/* Build ticks once */
+(function(){
+  var g = $("ticks"), s = "";
+  for(var u=0; u<=100; u++){
+    var x = X0 + SPAN*(u/100), major = u%10===0, mid = u%5===0, len = major?18:mid?12:7;
+    s += '<line x1="'+x+'" x2="'+x+'" y1="'+(BARREL_Y+2)+'" y2="'+(BARREL_Y+2+len)+'" stroke="'+(major?"#6b7280":"#aab0ba")+'" stroke-width="'+(major?1.4:1)+'"/>';
+    if(major && u>0) s += '<text x="'+x+'" y="'+(BARREL_Y+BARREL_H-8)+'" text-anchor="middle" font-family="monospace" font-size="10" fill="#6b7280">'+u+'</text>';
+  }
+  g.innerHTML = s;
+})();
+
+/* Populate peptide select */
+(function(){
+  var sel = $("peptide");
+  PEPTIDES.forEach(function(p){
+    var o = document.createElement("option");
+    o.value = p.slug; o.textContent = p.name + " (" + p.mg.map(function(m){return m+" mg";}).join(", ") + ")";
+    sel.appendChild(o);
+  });
+})();
+
+function derived(){
+  var vial = parseFloat(state.vial)||0, water = parseFloat(state.water)||0;
+  var doseRaw = parseFloat(state.dose)||0, doseMg = state.doseUnit==="mcg"? doseRaw/1000 : doseRaw;
+  var conc = concentration(vial, water), maxU = maxUnitsForWater(water);
+  var tgt = targetUnits(doseMg, conc);
+  var units = clampUnits(state.rawUnits, maxU);
+  return { vial:vial, water:water, doseMg:doseMg, conc:conc, maxU:maxU, tgt:tgt, units:units };
+}
+
+function render(){
+  var d = derived();
+  // auto-follow the target
+  if(state.autoFollow && d.tgt!==null){ state.rawUnits = clampUnits(d.tgt, d.maxU); }
+  var units = clampUnits(state.rawUnits, d.maxU);
+  var hasInputs = d.vial>0 && d.water>0;
+
+  // plunger + liquid
+  var px = X0 + SPAN*(units/100);
+  $("liquid").setAttribute("width", Math.max(0, px - X0));
+  $("stopper").setAttribute("x", px);
+  $("rod").setAttribute("x", px+STOPPER_W);
+  $("rod").setAttribute("width", Math.max(0, (px+ROD_LEN) - (px+STOPPER_W)));
+  $("thumb").setAttribute("x", px+ROD_LEN);
+  var pl = $("plunger"); pl.setAttribute("aria-valuenow", Math.round(units)); pl.setAttribute("aria-valuemax", d.maxU);
+
+  // target marker
+  var tg = $("target");
+  if(d.tgt!==null){
+    var over = d.tgt>100, tx = X0 + SPAN*(Math.min(d.tgt,100)/100);
+    tg.innerHTML = '<line x1="'+tx+'" x2="'+tx+'" y1="'+(BARREL_Y-10)+'" y2="'+(BARREL_Y+BARREL_H+10)+'" stroke="#c67b12" stroke-width="2" stroke-dasharray="4 4"/>'
+      + '<rect x="'+(tx-30)+'" y="'+(BARREL_Y-28)+'" width="60" height="18" rx="4" fill="#c67b12"/>'
+      + '<text x="'+tx+'" y="'+(BARREL_Y-15)+'" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#fff">'+(over?">100U":(Math.round(Math.min(d.tgt,100))+"U"))+'</text>';
+  } else tg.innerHTML = "";
+
+  // readouts
+  var amt = amountAtUnits(units, d.conc);
+  $("r-amount").textContent = hasInputs ? (amt.mg>=1 ? fmt(amt.mg,2)+" mg" : fmt(Math.round(amt.mcg),0)+" mcg") : "-";
+  $("r-vol").textContent = hasInputs ? fmt(unitsToMl(units),2)+" ml" : "-";
+  $("r-units").textContent = Math.round(units)+" U";
+  $("r-conc").textContent = hasInputs ? fmt(d.conc, d.conc<10?2:1)+" mg/ml" : "-";
+  $("uval").textContent = Math.round(units); $("unit-chip").textContent = Math.round(units)+" U";
+  var doses = dosesPerVial(d.vial, d.doseMg); $("doses").textContent = doses!==null ? fmt(doses,0) : "-";
+  $("minus").disabled = units<=0; $("plus").disabled = units>=d.maxU;
+
+  // blend breakdown
+  var blend = null;
+  if(state.preset && state.preset.blend) blend = blendPartsForVial(state.preset.blend, d.vial);
+  var bEl = $("blend");
+  if(blend && d.water>0){
+    var rows = blend.map(function(p,i){
+      var ml = unitsToMl(units), partConc = p.mg/d.water, pmg = ml*partConc, frac = d.vial>0? p.mg/d.vial : 0, c = SWATCHES[i%SWATCHES.length];
+      return '<div class="row"><span class="sw" style="background:'+c+'"></span><span class="nm">'+p.name+'</span>'
+        +'<span class="bar"><span style="width:'+Math.min(100,frac*100)+'%;background:'+c+'"></span></span>'
+        +'<span class="amt">'+(pmg>=1? fmt(pmg,2)+" mg" : fmt(Math.round(pmg*1000),0)+" mcg")+'</span></div>';
+    }).join("");
+    $("blend-rows").innerHTML = rows; bEl.hidden = false;
+  } else bEl.hidden = true;
+}
+
+/* ---- Input wiring ---- */
+$("peptide").addEventListener("change", function(e){
+  var slug = e.target.value;
+  state.preset = PEPTIDES.filter(function(p){ return p.slug===slug; })[0] || null;
+  if(state.preset){ state.vial = String(state.preset.mg[0]); $("vial").value = state.vial;
+    $("diluent").textContent = "Suggested diluent: " + state.preset.diluent; $("diluent").hidden = false;
+  } else { $("diluent").hidden = true; }
+  var ref = $("studyRef");
+  if(state.preset && state.preset.studyDose){
+    ref.innerHTML = "Doses used in research: " + state.preset.studyDose + ". " + state.preset.studyNote
+      + ". Reference only, not a recommendation. "
+      + '<a href="https://peptidesdirect.io/research/dosing" target="_blank" rel="noopener">Dosing reference -&gt;</a>';
+    ref.hidden = false;
+  } else { ref.hidden = true; ref.innerHTML = ""; }
+  state.autoFollow = true; render();
+});
+$("vial").addEventListener("input", function(e){ state.vial = e.target.value; state.autoFollow = true; render(); });
+$("water").addEventListener("input", function(e){ state.water = e.target.value; state.autoFollow = true; render(); });
+$("dose").addEventListener("input", function(e){ state.dose = e.target.value; state.autoFollow = true; render(); });
+function setUnit(u){ state.doseUnit=u; $("u-mcg").setAttribute("aria-pressed", u==="mcg"); $("u-mg").setAttribute("aria-pressed", u==="mg"); state.autoFollow=true; render(); }
+$("u-mcg").addEventListener("click", function(){ setUnit("mcg"); });
+$("u-mg").addEventListener("click", function(){ setUnit("mg"); });
+
+/* ---- Plunger drag / keys / step ---- */
+var svg = $("syr");
+function updateFromClientX(clientX){
+  var rect = svg.getBoundingClientRect(); if(rect.width===0) return;
+  var scale = 900/rect.width, u = ((clientX-rect.left)*scale - X0)/SPAN*100;
+  state.autoFollow = false; state.rawUnits = clampUnits(u, derived().maxU); render();
+}
+svg.addEventListener("pointerdown", function(e){ state.dragging=true; svg.style.cursor="grabbing"; updateFromClientX(e.clientX); e.preventDefault(); $("plunger").focus(); });
+window.addEventListener("pointermove", function(e){ if(state.dragging) updateFromClientX(e.clientX); });
+window.addEventListener("pointerup", function(){ state.dragging=false; svg.style.cursor="pointer"; });
+$("plunger").addEventListener("keydown", function(e){
+  var dd=0; if(e.key==="ArrowRight"||e.key==="ArrowUp") dd=1; else if(e.key==="ArrowLeft"||e.key==="ArrowDown") dd=-1; else return;
+  if(e.shiftKey) dd*=5; e.preventDefault(); state.autoFollow=false; state.rawUnits = clampUnits(derived().units+dd, derived().maxU); render();
+});
+function step(dd){ state.autoFollow=false; state.rawUnits = clampUnits(derived().units+dd, derived().maxU); render(); }
+$("minus").addEventListener("click", function(){ step(-1); });
+$("plus").addEventListener("click", function(){ step(1); });
+
+/* Pre-select the peptide from a ?peptide=<slug> query param (e.g. an
+   embedding page linking in with a peptide already chosen), then fire the
+   same change handler as a manual selection so mg/diluent/study-dose fill
+   in. Water stays at its own default (2 ml); the dose input is never
+   touched. No-op if the param is missing or unknown. */
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var slug = params.get("peptide");
+  if(!slug) return;
+  var match = PEPTIDES.filter(function(p){ return p.slug===slug; })[0];
+  if(!match) return;
+  $("peptide").value = slug;
+  $("peptide").dispatchEvent(new Event("change"));
+})();
+
+render();
+
+/* Allow the host page to set ?brand= (custom attribution target stays our domain) and ?lang later. */
+</script>
+</body>
+</html>

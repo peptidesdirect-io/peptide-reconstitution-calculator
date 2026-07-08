@@ -1,0 +1,432 @@
+{
+  "_meta": {
+    "description": "Identity and handling reference dataset for the open-source peptide reconstitution calculator. Molecular-identity values are taken from PubChem (cited CID per compound). pH-by-class follows documented formulation logic, not a per-compound measurement. Contains no purity, potency, quality, or dosing data.",
+    "compiled": "2026-07-08",
+    "license": "CC BY 4.0",
+    "source": "https://calc.peptidesdirect.io",
+    "disclaimer": "Identity and handling reference only. Not dosing guidance. Not medical advice."
+  },
+  "peptides": [
+    {
+      "slug": "bpc-157",
+      "name": "BPC-157",
+      "molecularWeightDa": 1419.5,
+      "pubchemCid": 9941957,
+      "typicalVialMg": [5, 10],
+      "diluent": "Bacteriostatic water (neutral)",
+      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
+      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
+      "plasmaHalfLife": null,
+      "sources": [
+        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/9941957" }
+      ]
+    },
+    {
+      "slug": "tb-500",
+      "name": "TB-500",
+      "molecularWeightDa": 4963,
+      "pubchemCid": 45382195,
+      "typicalVialMg": [5, 10],
+      "diluent": "Bacteriostatic water (neutral)",
+      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
+      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
+      "plasmaHalfLife": null,
+      "sources": [
+        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/45382195" }
+      ]
+    },
+    {
+      "slug": "ghk-cu",
+      "name": "GHK-Cu",
+      "molecularWeightDa": 400.9,
+      "pubchemCid": 139035031,
+      "typicalVialMg": [50, 100],
+      "diluent": "Bacteriostatic water (do not acidify; blue colour is normal)",
+      "reconstitutionPhClass": "copper complex, neutral, do not acidify",
+      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
+      "plasmaHalfLife": null,
+      "sources": [
+        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/139035031" }
+      ]
+    },
+    {
+      "slug": "ipamorelin",
+      "name": "Ipamorelin",
+      "molecularWeightDa": 711.9,
+      "pubchemCid": 9831659,
+      "typicalVialMg": [5, 10],
+      "diluent": "Bacteriostatic water (neutral)",
+      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
+      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
+      "plasmaHalfLife": null,
+      "sources": [
+        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/9831659" }
+      ]
+    },
+    {
+      "slug": "cjc-1295",
+      "name": "CJC-1295 (no DAC)",
+      "molecularWeightDa": 3367.9,
+      "pubchemCid": 56841945,
+      "typicalVialMg": [5, 10],
+      "diluent": "Bacteriostatic water (neutral)",
+      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
+      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
+      "plasmaHalfLife": null,
+      "sources": [
+        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/56841945" }
+      ]
+    },
+    {
+      "slug": "sermorelin",
+      "name": "Sermorelin",
+      "molecularWeightDa": 3357.9,
+      "pubchemCid": 16132413,
+      "typicalVialMg": [5],
+      "diluent": "Bacteriostatic water (neutral)",
+      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
+      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
+      "plasmaHalfLife": null,
+      "sources": [
+        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/16132413" }
+      ]
+    },
+    {
+      "slug": "tesamorelin",
+      "name": "Tesamorelin",
+      "molecularWeightDa": 5136,
+      "pubchemCid": 16137828,
+      "typicalVialMg": [5, 10],
+      "diluent": "Bacteriostatic water (neutral)",
+      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
+      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
+      "plasmaHalfLife": "~8 min (healthy subjects; EGRIFTA SV FDA label)",
+      "sources": [
+        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/16137828" },
+        { "field": "plasmaHalfLife", "ref": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3d783378-b02d-4f19-99dd-0fc91a042224" }
+      ]
+    },
+    {
+      "slug": "semax",
+      "name": "Semax",
+      "molecularWeightDa": 813.9,
+      "pubchemCid": 9811102,
+      "typicalVialMg": [10, 30],
+      "diluent": "Bacteriostatic water (neutral)",
+      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
+      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
+      "plasmaHalfLife": null,
+      "sources": [
+        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/9811102" }
+      ]
+    },
+    {
+      "slug": "selank",
+      "name": "Selank",
+      "molecularWeightDa": 751.9,
+      "pubchemCid": 11765600,
+      "typicalVialMg": [10],
+      "diluent": "Bacteriostatic water (neutral)",
+      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
+      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
+      "plasmaHalfLife": null,
+      "sources": [
+        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/11765600" }
+      ]
+    },
+    {
+      "slug": "mots-c",
+      "name": "MOTS-c",
+      "molecularWeightDa": 2174.6,
+      "pubchemCid": 146675088,
+      "typicalVialMg": [10],
+      "diluent": "Bacteriostatic water (neutral)",
+      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
+      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
+      "plasmaHalfLife": null,
+      "sources": [
+        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/146675088" }
+      ]
+    },
+    {
+      "slug": "epitalon",
+      "name": "Epitalon",
+      "molecularWeightDa": 390.35,
+      "pubchemCid": 219042,
+      "typicalVialMg": [10, 50],
+      "diluent": "Bacteriostatic water (neutral)",
+      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
+      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
+      "plasmaHalfLife": null,
+      "sources": [
+        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/219042" }
+      ]
+    },
+    {
+      "slug": "nad-plus",
+      "name": "NAD+",
+      "molecularWeightDa": 663.4,
+      "pubchemCid": 5892,
+      "typicalVialMg": [500, 1000],
+      "diluent": "Bacteriostatic water (neutral)",
+      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
+      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
+      "plasmaHalfLife": null,
+      "sources": [
+        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/5892" }
+      ]
+    },
+    {
+      "slug": "ss-31",
+      "name": "SS-31",
+      "molecularWeightDa": 639.8,
+      "pubchemCid": 11764719,
+      "typicalVialMg": [10, 50],
+      "diluent": "Bacteriostatic water (neutral)",
+      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
+      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
+      "plasmaHalfLife": null,
+      "sources": [
+        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/11764719" }
+      ]
+    },
+    {
+      "slug": "kpv",
+      "name": "KPV",
+      "molecularWeightDa": 342.43,
+      "pubchemCid": 125672,
+      "typicalVialMg": [10],
+      "diluent": "Bacteriostatic water (neutral)",
+      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
+      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
+      "plasmaHalfLife": null,
+      "sources": [
+        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/125672" }
+      ]
+    },
+    {
+      "slug": "ll-37",
+      "name": "LL-37",
+      "molecularWeightDa": 4493,
+      "pubchemCid": 16198951,
+      "typicalVialMg": [5],
+      "diluent": "Bacteriostatic water (neutral)",
+      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
+      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
+      "plasmaHalfLife": null,
+      "sources": [
+        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/16198951" }
+      ]
+    },
+    {
+      "slug": "thymosin-alpha-1",
+      "name": "Thymosin Alpha-1",
+      "molecularWeightDa": 3108.3,
+      "pubchemCid": 16130571,
+      "typicalVialMg": [5, 10],
+      "diluent": "Bacteriostatic water (neutral)",
+      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
+      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
+      "plasmaHalfLife": null,
+      "sources": [
+        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/16130571" }
+      ]
+    },
+    {
+      "slug": "thymalin",
+      "name": "Thymalin",
+      "molecularWeightDa": null,
+      "pubchemCid": null,
+      "typicalVialMg": [10],
+      "diluent": "Bacteriostatic water (neutral)",
+      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
+      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
+      "plasmaHalfLife": null,
+      "sources": [],
+      "note": "Thymalin is a thymus polypeptide fraction, not a single defined molecule, so it has no single PubChem CID and no single molecular weight. Do not confuse with thymulin (nonathymulin, PubChem CID 3085284), which is a different compound."
+    },
+    {
+      "slug": "dsip",
+      "name": "DSIP",
+      "molecularWeightDa": 848.8,
+      "pubchemCid": 68816,
+      "typicalVialMg": [5, 10],
+      "diluent": "Bacteriostatic water (neutral)",
+      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
+      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
+      "plasmaHalfLife": null,
+      "sources": [
+        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/68816" }
+      ]
+    },
+    {
+      "slug": "melanotan-2",
+      "name": "Melanotan-2",
+      "molecularWeightDa": 1024.2,
+      "pubchemCid": 92432,
+      "typicalVialMg": [10],
+      "diluent": "Bacteriostatic water (neutral)",
+      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
+      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
+      "plasmaHalfLife": null,
+      "sources": [
+        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/92432" }
+      ]
+    },
+    {
+      "slug": "retatrutide",
+      "name": "Retatrutide",
+      "molecularWeightDa": 4731,
+      "pubchemCid": 171390338,
+      "typicalVialMg": [5, 10, 15],
+      "diluent": "Bacteriostatic water, near-neutral (test water pH; acidic water is the top cause of a milky vial)",
+      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
+      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
+      "plasmaHalfLife": "~6 days (Jastreboff et al., NEJM 2023)",
+      "sources": [
+        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/171390338" },
+        { "field": "plasmaHalfLife", "ref": "https://pubmed.ncbi.nlm.nih.gov/37366315/" }
+      ]
+    },
+    {
+      "slug": "cagrilintide",
+      "name": "Cagrilintide",
+      "molecularWeightDa": 4409,
+      "pubchemCid": 171397054,
+      "typicalVialMg": [5, 10],
+      "diluent": "Acetic-acid water then top up with bacteriostatic water (amylin analog, acidic ~pH 4)",
+      "reconstitutionPhClass": "acidic ~4 (amylin analog, acetic-acid water)",
+      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
+      "plasmaHalfLife": "~159-195 h, about one week (Enebo et al., Lancet 2021)",
+      "sources": [
+        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/171397054" },
+        { "field": "plasmaHalfLife", "ref": "https://pubmed.ncbi.nlm.nih.gov/33894838/" }
+      ]
+    },
+    {
+      "slug": "aod-9604",
+      "name": "AOD-9604",
+      "molecularWeightDa": 1815.1,
+      "pubchemCid": 71300630,
+      "typicalVialMg": [5],
+      "diluent": "Bacteriostatic water (neutral)",
+      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
+      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
+      "plasmaHalfLife": null,
+      "sources": [
+        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/71300630" }
+      ]
+    },
+    {
+      "slug": "igf-1-lr3",
+      "name": "IGF-1 LR3",
+      "molecularWeightDa": null,
+      "pubchemCid": null,
+      "typicalVialMg": [1],
+      "diluent": "Dilute acetic acid, then bacteriostatic water (acetate-buffered, acidic ~pH 3-4)",
+      "reconstitutionPhClass": "acidic ~3-4 (acetate-buffered, e.g. IGF analog)",
+      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
+      "plasmaHalfLife": null,
+      "sources": [],
+      "note": "IGF-1 LR3 (Long R3 IGF-1) is an 83-residue engineered analog of insulin-like growth factor 1 with an N-terminal extension and an Arg3 substitution. It has no single clean PubChem CID, so molecular weight is left uncited rather than invented."
+    },
+    {
+      "slug": "glow",
+      "name": "GLOW (GHK-Cu / BPC-157 / TB-500)",
+      "molecularWeightDa": null,
+      "pubchemCid": null,
+      "typicalVialMg": [70],
+      "diluent": "Bacteriostatic water (do not acidify)",
+      "reconstitutionPhClass": "copper complex, neutral, do not acidify",
+      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
+      "plasmaHalfLife": null,
+      "components": [
+        { "name": "GHK-Cu", "mg": 50, "pubchemCid": 139035031 },
+        { "name": "BPC-157", "mg": 10, "pubchemCid": 9941957 },
+        { "name": "TB-500", "mg": 10, "pubchemCid": 45382195 }
+      ],
+      "sources": [
+        { "field": "components", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/139035031" }
+      ],
+      "note": "Blend of three peptides; no single molecular weight. Contains the GHK copper complex, so do not acidify."
+    },
+    {
+      "slug": "klow",
+      "name": "KLOW (GHK-Cu / BPC-157 / TB-500 / KPV)",
+      "molecularWeightDa": null,
+      "pubchemCid": null,
+      "typicalVialMg": [80],
+      "diluent": "Bacteriostatic water (do not acidify)",
+      "reconstitutionPhClass": "copper complex, neutral, do not acidify",
+      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
+      "plasmaHalfLife": null,
+      "components": [
+        { "name": "GHK-Cu", "mg": 50, "pubchemCid": 139035031 },
+        { "name": "BPC-157", "mg": 10, "pubchemCid": 9941957 },
+        { "name": "TB-500", "mg": 10, "pubchemCid": 45382195 },
+        { "name": "KPV", "mg": 10, "pubchemCid": 125672 }
+      ],
+      "sources": [
+        { "field": "components", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/139035031" }
+      ],
+      "note": "Blend of four peptides; no single molecular weight. Contains the GHK copper complex, so do not acidify."
+    },
+    {
+      "slug": "cjc-1295-ipamorelin-mix",
+      "name": "CJC-1295 / Ipamorelin",
+      "molecularWeightDa": null,
+      "pubchemCid": null,
+      "typicalVialMg": [10],
+      "diluent": "Bacteriostatic water (neutral)",
+      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
+      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
+      "plasmaHalfLife": null,
+      "components": [
+        { "name": "CJC-1295 (no DAC)", "mg": 5, "pubchemCid": 56841945 },
+        { "name": "Ipamorelin", "mg": 5, "pubchemCid": 9831659 }
+      ],
+      "sources": [
+        { "field": "components", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/56841945" }
+      ],
+      "note": "Blend of two peptides; no single molecular weight."
+    },
+    {
+      "slug": "bpc-157-tb-500-mix",
+      "name": "BPC-157 / TB-500",
+      "molecularWeightDa": null,
+      "pubchemCid": null,
+      "typicalVialMg": [10, 20],
+      "diluent": "Bacteriostatic water (neutral)",
+      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
+      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
+      "plasmaHalfLife": null,
+      "components": [
+        { "name": "BPC-157", "mg": 5, "pubchemCid": 9941957 },
+        { "name": "TB-500", "mg": 5, "pubchemCid": 45382195 }
+      ],
+      "sources": [
+        { "field": "components", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/9941957" }
+      ],
+      "note": "Blend of two peptides in a 1:1 ratio (5 mg / 5 mg at 10 mg total, 10 mg / 10 mg at 20 mg total); no single molecular weight."
+    },
+    {
+      "slug": "semax-selank-mix",
+      "name": "Semax / Selank",
+      "molecularWeightDa": null,
+      "pubchemCid": null,
+      "typicalVialMg": [20],
+      "diluent": "Bacteriostatic water (neutral)",
+      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
+      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
+      "plasmaHalfLife": null,
+      "components": [
+        { "name": "Semax", "mg": 10, "pubchemCid": 9811102 },
+        { "name": "Selank", "mg": 10, "pubchemCid": 11765600 }
+      ],
+      "sources": [
+        { "field": "components", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/9811102" }
+      ],
+      "note": "Blend of two peptides; no single molecular weight."
+    }
+  ]
+}
