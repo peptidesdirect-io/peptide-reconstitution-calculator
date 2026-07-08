@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Live demo
+    url: https://calc.peptidesdirect.io
+    about: Try the calculator before filing an issue, to confirm the behavior you are seeing.
+  - name: General support
+    url: https://peptidesdirect.io/partners
+    about: For questions unrelated to a bug or feature in this repository.

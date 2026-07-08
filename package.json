@@ -15,7 +15,7 @@
   "homepage": "https://calc.peptidesdirect.io",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OWNER/peptide-reconstitution-calculator.git"
+    "url": "git+https://github.com/peptidesdirect-io/peptide-reconstitution-calculator.git"
   },
   "private": false,
   "type": "module",

@@ -9,9 +9,17 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/peptidesdirect-io/peptide-reconstitution-calculator/actions/workflows/ci.yml"><img src="https://github.com/peptidesdirect-io/peptide-reconstitution-calculator/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
   <a href="https://calc.peptidesdirect.io"><img src="https://img.shields.io/badge/live_demo-calc.peptidesdirect.io-0f766e" alt="Live demo" /></a>
-  <img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT" />
+  <img src="https://img.shields.io/badge/deployed_on-GitHub_Pages-222?logo=github&logoColor=white" alt="Deployed on GitHub Pages" />
+  <a href="LICENSE"><img src="https://img.shields.io/badge/code-MIT-blue" alt="Code: MIT" /></a>
+  <a href="https://creativecommons.org/licenses/by/4.0/"><img src="https://img.shields.io/badge/data-CC_BY_4.0-blue" alt="Data: CC BY 4.0" /></a>
   <img src="https://img.shields.io/badge/runtime_dependencies-0-brightgreen" alt="Zero runtime dependencies" />
+  <img src="https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white" alt="TypeScript strict" />
+</p>
+
+<p align="center">
+  <img src="assets/demo.gif" alt="Dragging the syringe plunger updates units, volume, concentration and doses per vial in real time" width="640" />
 </p>
 
 ## What it is
@@ -78,6 +86,10 @@ No other assumptions or corrections are applied. The tool does the arithmetic; i
 - **communityDose**: what peptide research forums discuss as commonly used amounts. This is forum-sourced, not from a study, and is never presented as a recommendation.
 
 None of this is medical advice or a dosing recommendation. Most of the compounds listed have no established human protocol; where doses are shown, they describe what was used in a specific cited study or what a community discusses, not what anyone should use. The dataset is licensed separately under CC BY 4.0 (see License below) and can be freely edited when you fork this project.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the project layout, how to add or edit a peptide, and pull request conventions.
 
 ## License
 
