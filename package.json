@@ -1,7 +1,7 @@
 {
-  "name": "@peptidesdirect/peptide-reconstitution-calculator",
+  "name": "@peptidesdirect-io/peptide-reconstitution-calculator",
   "version": "1.0.0",
-  "description": "Self-contained, dependency-free peptide reconstitution and syringe-dose calculator. Embeddable via a single HTML file, no build step required.",
+  "description": "Self-contained, dependency-free peptide reconstitution and syringe-dose calculator. Builds to a single static HTML file.",
   "keywords": [
     "peptide",
     "reconstitution",
@@ -17,12 +17,17 @@
     "type": "git",
     "url": "git+https://github.com/OWNER/peptide-reconstitution-calculator.git"
   },
-  "files": [
-    "index.html",
-    "peptides.json",
-    "README.md",
-    "LICENSE"
-  ],
-  "main": "index.html",
-  "private": false
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "vite": "^6",
+    "vite-plugin-singlefile": "^2"
+  }
 }

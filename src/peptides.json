@@ -1,10 +1,10 @@
 {
   "_meta": {
-    "description": "Identity and handling reference dataset for the open-source peptide reconstitution calculator. Molecular-identity values are taken from PubChem (cited CID per compound). pH-by-class follows documented formulation logic, not a per-compound measurement. Contains no purity, potency, quality, or dosing data.",
+    "description": "Reference dataset for the open-source peptide reconstitution calculator. Identity fields (molecularWeightDa, pubchemCid) are taken from PubChem, cited per compound. Dose fields are a research reference only: studyDose/studyNote summarize doses used in published studies (see peptidesdirect.io/research/dosing for full citations); communityDose summarizes what is discussed in peptide forums.",
     "compiled": "2026-07-08",
     "license": "CC BY 4.0",
     "source": "https://calc.peptidesdirect.io",
-    "disclaimer": "Identity and handling reference only. Not dosing guidance. Not medical advice."
+    "disclaimer": "Reference only. Study doses = doses used in cited studies; community doses = what peptide forums discuss. Neither is a recommendation, dosing guidance or medical advice; most compounds have no established human protocol."
   },
   "peptides": [
     {
@@ -17,6 +17,10 @@
       "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
       "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
       "plasmaHalfLife": null,
+      "studyDose": "10 pg/kg to 2 mg/kg (animal)",
+      "studyNote": "No established human protocol",
+      "communityDose": "250-500 mcg/day (SC)",
+      "doseBasis": "preclinical",
       "sources": [
         { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/9941957" }
       ]
@@ -31,6 +35,10 @@
       "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
       "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
       "plasmaHalfLife": null,
+      "studyDose": "1.6 mg/kg/day to 6 mg/kg (animal)",
+      "studyNote": "No established human protocol",
+      "communityDose": "4-8 mg/week (SC)",
+      "doseBasis": "preclinical",
       "sources": [
         { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/45382195" }
       ]
@@ -45,6 +53,10 @@
       "reconstitutionPhClass": "copper complex, neutral, do not acidify",
       "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
       "plasmaHalfLife": null,
+      "studyDose": "0.2 to 20 mg/kg/day (animal)",
+      "studyNote": "No established human protocol",
+      "communityDose": "1-2 mg/day (SC)",
+      "doseBasis": "preclinical",
       "sources": [
         { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/139035031" }
       ]
@@ -59,6 +71,10 @@
       "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
       "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
       "plasmaHalfLife": null,
+      "studyDose": "1.6 mcg/kg to 1.6 mg/kg/day (animal)",
+      "studyNote": "No established human protocol",
+      "communityDose": "200-300 mcg/day (SC)",
+      "doseBasis": "human-trial",
       "sources": [
         { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/9831659" }
       ]
@@ -73,6 +89,10 @@
       "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
       "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
       "plasmaHalfLife": null,
+      "studyDose": "30 to 90 mcg/kg (human trials)",
+      "studyNote": "No established human protocol",
+      "communityDose": "100-200 mcg/day (no-DAC) or 1-2 mg/week (DAC), SC",
+      "doseBasis": "human-trial",
       "sources": [
         { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/56841945" }
       ]
@@ -87,6 +107,10 @@
       "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
       "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
       "plasmaHalfLife": null,
+      "studyDose": "1 to 60 mcg/kg/day (human trials)",
+      "studyNote": "Approved human dose exists",
+      "communityDose": "200-300 mcg (SC, evening)",
+      "doseBasis": "human-approved",
       "sources": [
         { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/16132413" }
       ]
@@ -101,6 +125,10 @@
       "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
       "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
       "plasmaHalfLife": "~8 min (healthy subjects; EGRIFTA SV FDA label)",
+      "studyDose": "2 mg/day to 600 mcg/kg (animal + human)",
+      "studyNote": "Approved human dose exists",
+      "communityDose": "1-2 mg/day (SC)",
+      "doseBasis": "human-approved",
       "sources": [
         { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/16137828" },
         { "field": "plasmaHalfLife", "ref": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3d783378-b02d-4f19-99dd-0fc91a042224" }
@@ -116,6 +144,10 @@
       "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
       "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
       "plasmaHalfLife": null,
+      "studyDose": "0.045 to 0.25 mg/kg (animal)",
+      "studyNote": "No established human protocol",
+      "communityDose": "300-600 mcg/day (intranasal)",
+      "doseBasis": "human-trial",
       "sources": [
         { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/9811102" }
       ]
@@ -130,6 +162,10 @@
       "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
       "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
       "plasmaHalfLife": null,
+      "studyDose": "0.3 mg/kg (animal)",
+      "studyNote": "No established human protocol",
+      "communityDose": "250-500 mcg/day (intranasal)",
+      "doseBasis": "preclinical",
       "sources": [
         { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/11765600" }
       ]
@@ -144,6 +180,10 @@
       "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
       "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
       "plasmaHalfLife": null,
+      "studyDose": "0.5 to 15 mg/kg (animal)",
+      "studyNote": "No established human protocol",
+      "communityDose": "5-10 mg/week (SC)",
+      "doseBasis": "preclinical",
       "sources": [
         { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/146675088" }
       ]
@@ -158,6 +198,10 @@
       "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
       "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
       "plasmaHalfLife": null,
+      "studyDose": "0.4 to 40 mcg/kg (animal)",
+      "studyNote": "No established human protocol",
+      "communityDose": "5-10 mg/day (SC)",
+      "doseBasis": "preclinical",
       "sources": [
         { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/219042" }
       ]
@@ -172,6 +216,10 @@
       "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
       "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
       "plasmaHalfLife": null,
+      "studyDose": "5 mg/kg to 750 mg total (animal + human)",
+      "studyNote": "No established human protocol",
+      "communityDose": "50-100 mg (SC, 2-3x/week)",
+      "doseBasis": "human-trial",
       "sources": [
         { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/5892" }
       ]
@@ -186,6 +234,10 @@
       "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
       "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
       "plasmaHalfLife": null,
+      "studyDose": "0.005 to 0.25 mg/kg/h (human trials)",
+      "studyNote": "No established human protocol",
+      "communityDose": "1-2 (up to 5-10) mg/day (SC)",
+      "doseBasis": "human-trial",
       "sources": [
         { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/11764719" }
       ]
@@ -200,6 +252,10 @@
       "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
       "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
       "plasmaHalfLife": null,
+      "studyDose": "16 mcg/kg to 2.5 mg/kg (animal)",
+      "studyNote": "No established human protocol",
+      "communityDose": "250-500 mcg/day (SC)",
+      "doseBasis": "preclinical",
       "sources": [
         { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/125672" }
       ]
@@ -214,6 +270,10 @@
       "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
       "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
       "plasmaHalfLife": null,
+      "studyDose": "under 10 mcg/mL to 3.2 mg/mL (in vitro / human topical)",
+      "studyNote": "No established human protocol",
+      "communityDose": "100-300 mcg/day (SC)",
+      "doseBasis": "preclinical",
       "sources": [
         { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/16198951" }
       ]
@@ -228,6 +288,10 @@
       "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
       "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
       "plasmaHalfLife": null,
+      "studyDose": "900 mcg/m2 to 1.6 mg per dose (human trials)",
+      "studyNote": "Approved human dose exists",
+      "communityDose": "1.5-1.6 mg (SC)",
+      "doseBasis": "human-approved",
       "sources": [
         { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/16130571" }
       ]
@@ -242,6 +306,10 @@
       "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
       "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
       "plasmaHalfLife": null,
+      "studyDose": "10 mg/day (human trials)",
+      "studyNote": "No established human protocol",
+      "communityDose": "10 mg/day (IM or SC)",
+      "doseBasis": "human-trial",
       "sources": [],
       "note": "Thymalin is a thymus polypeptide fraction, not a single defined molecule, so it has no single PubChem CID and no single molecular weight. Do not confuse with thymulin (nonathymulin, PubChem CID 3085284), which is a different compound."
     },
@@ -255,6 +323,10 @@
       "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
       "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
       "plasmaHalfLife": null,
+      "studyDose": "21 mcg/kg to 2 mg absolute (animal + human)",
+      "studyNote": "No established human protocol",
+      "communityDose": "100-300 mcg (SC, evening)",
+      "doseBasis": "human-trial",
       "sources": [
         { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/68816" }
       ]
@@ -269,6 +341,10 @@
       "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
       "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
       "plasmaHalfLife": null,
+      "studyDose": "0.01 mg/kg to 6 mg (human trials)",
+      "studyNote": "No established human protocol",
+      "communityDose": "250-500 mcg/day (SC)",
+      "doseBasis": "human-trial",
       "sources": [
         { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/92432" }
       ]
@@ -283,6 +359,10 @@
       "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
       "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
       "plasmaHalfLife": "~6 days (Jastreboff et al., NEJM 2023)",
+      "studyDose": "0.5 to 12 mg/week (human trials)",
+      "studyNote": "No established human protocol",
+      "communityDose": "1-2 titrating up to 12 mg/week (SC)",
+      "doseBasis": "human-trial",
       "sources": [
         { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/171390338" },
         { "field": "plasmaHalfLife", "ref": "https://pubmed.ncbi.nlm.nih.gov/37366315/" }
@@ -298,6 +378,10 @@
       "reconstitutionPhClass": "acidic ~4 (amylin analog, acetic-acid water)",
       "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
       "plasmaHalfLife": "~159-195 h, about one week (Enebo et al., Lancet 2021)",
+      "studyDose": "0.16 to 4.5 mg/week (human trials)",
+      "studyNote": "No established human protocol",
+      "communityDose": "0.6-2.4 mg/week (SC)",
+      "doseBasis": "human-trial",
       "sources": [
         { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/171397054" },
         { "field": "plasmaHalfLife", "ref": "https://pubmed.ncbi.nlm.nih.gov/33894838/" }
@@ -313,6 +397,10 @@
       "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
       "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
       "plasmaHalfLife": null,
+      "studyDose": "0.25 mg per knee to 0.5 mg/kg/day (animal)",
+      "studyNote": "No established human protocol",
+      "communityDose": "300-500 mcg/day (SC)",
+      "doseBasis": "preclinical",
       "sources": [
         { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/71300630" }
       ]
@@ -327,6 +415,10 @@
       "reconstitutionPhClass": "acidic ~3-4 (acetate-buffered, e.g. IGF analog)",
       "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
       "plasmaHalfLife": null,
+      "studyDose": "0.18 to 2.5 mg/kg/day (animal)",
+      "studyNote": "No established human protocol",
+      "communityDose": "20-50 mcg/day (SC or IM)",
+      "doseBasis": "preclinical",
       "sources": [],
       "note": "IGF-1 LR3 (Long R3 IGF-1) is an 83-residue engineered analog of insulin-like growth factor 1 with an N-terminal extension and an Arg3 substitution. It has no single clean PubChem CID, so molecular weight is left uncited rather than invented."
     },
@@ -340,6 +432,10 @@
       "reconstitutionPhClass": "copper complex, neutral, do not acidify",
       "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
       "plasmaHalfLife": null,
+      "studyDose": "",
+      "studyNote": "",
+      "communityDose": "",
+      "doseBasis": "",
       "components": [
         { "name": "GHK-Cu", "mg": 50, "pubchemCid": 139035031 },
         { "name": "BPC-157", "mg": 10, "pubchemCid": 9941957 },
@@ -360,6 +456,10 @@
       "reconstitutionPhClass": "copper complex, neutral, do not acidify",
       "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
       "plasmaHalfLife": null,
+      "studyDose": "",
+      "studyNote": "",
+      "communityDose": "",
+      "doseBasis": "",
       "components": [
         { "name": "GHK-Cu", "mg": 50, "pubchemCid": 139035031 },
         { "name": "BPC-157", "mg": 10, "pubchemCid": 9941957 },
@@ -381,6 +481,10 @@
       "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
       "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
       "plasmaHalfLife": null,
+      "studyDose": "",
+      "studyNote": "",
+      "communityDose": "",
+      "doseBasis": "",
       "components": [
         { "name": "CJC-1295 (no DAC)", "mg": 5, "pubchemCid": 56841945 },
         { "name": "Ipamorelin", "mg": 5, "pubchemCid": 9831659 }
@@ -400,6 +504,10 @@
       "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
       "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
       "plasmaHalfLife": null,
+      "studyDose": "",
+      "studyNote": "",
+      "communityDose": "",
+      "doseBasis": "",
       "components": [
         { "name": "BPC-157", "mg": 5, "pubchemCid": 9941957 },
         { "name": "TB-500", "mg": 5, "pubchemCid": 45382195 }
@@ -419,6 +527,10 @@
       "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
       "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
       "plasmaHalfLife": null,
+      "studyDose": "",
+      "studyNote": "",
+      "communityDose": "",
+      "doseBasis": "",
       "components": [
         { "name": "Semax", "mg": 10, "pubchemCid": 9811102 },
         { "name": "Selank", "mg": 10, "pubchemCid": 11765600 }

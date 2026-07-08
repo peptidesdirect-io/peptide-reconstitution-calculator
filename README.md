@@ -5,14 +5,20 @@
 <h1 align="center">Peptide Reconstitution Calculator</h1>
 
 <p align="center">
-  A self-contained, dependency-free calculator that converts vial mg, diluent volume and target dose into syringe units, injection volume, concentration and doses per vial.
+  A TypeScript + Vite calculator that converts vial mg, diluent volume and target dose into syringe units, injection volume, concentration and doses per vial. Builds to one self-contained, dependency-free static HTML file.
 </p>
 
 <p align="center">
   <a href="https://calc.peptidesdirect.io"><img src="https://img.shields.io/badge/live_demo-calc.peptidesdirect.io-0f766e" alt="Live demo" /></a>
   <img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT" />
-  <img src="https://img.shields.io/badge/dependencies-0-brightgreen" alt="Zero dependencies" />
+  <img src="https://img.shields.io/badge/runtime_dependencies-0-brightgreen" alt="Zero runtime dependencies" />
 </p>
+
+## What it is
+
+An interactive U-100 syringe: drag the plunger or use arrow keys to set a dose, and the tool works out units, injection volume, concentration and doses per vial from three inputs (vial content in mg, diluent volume in ml, target dose). It ships with a bundled reference dataset (`src/peptides.json`) of common research peptides: identity (PubChem-cited molecular weight), handling (diluent, pH class, storage) and dose references (see below).
+
+Source code is TypeScript, built with Vite. There are no runtime dependencies: the production build is a single `dist/index.html` file with all JS and CSS inlined, so it can be self-hosted, embedded, or dropped onto any static host with zero configuration.
 
 ## Live demo
 
@@ -20,22 +26,38 @@
 
 ## Embed
 
-Drop this snippet into any page. It is a single `<iframe>`, no scripts or stylesheets to load, no build step.
+Drop this snippet into any page. It loads the single built file, no other scripts or stylesheets required.
 
 ```html
 <iframe src="https://calc.peptidesdirect.io" width="100%" height="720" style="border:0;max-width:920px" title="Peptide Reconstitution Calculator" loading="lazy"></iframe>
 ```
 
-You can also self-host it: `index.html` is a single file with no external requests, so copying it (plus `peptides.json` if you want the bundled reference dataset) onto your own domain works with no configuration changes.
+You can also preselect a peptide via `?peptide=<slug>`, e.g. `https://calc.peptidesdirect.io/?peptide=bpc-157` (see `src/peptides.json` for the full list of slugs).
 
-## Features
+## Fork and make it your own
 
-- Interactive U-100 syringe graphic: drag the plunger or use arrow keys to set the dose
-- Live readouts for units, injection volume, concentration, and doses per vial as you change mg, water, or dose
-- Blend breakdown for multi-peptide vials, with a per-component bar chart of the mix
-- Dependency-free: one HTML file, no npm install, no CDN calls, no tracking
-- Embeddable anywhere via `<iframe>`, or self-hosted as a static file
-- Light and dark mode, following the embedding page's `prefers-color-scheme`
+1. Fork this repository.
+2. `npm install`
+3. Edit `src/peptides.json`: change which peptides are listed, their vial sizes, diluent, pH class, storage notes, or dose references. The shape of each entry is documented in `src/peptides.ts` (the `Peptide` interface) and in [CONTRIBUTING.md](CONTRIBUTING.md).
+4. `npm run build`
+5. Deploy the contents of `dist/` (it is a single self-contained `index.html`) to your own domain.
+
+Nothing else needs to change: the branding, colours, and copy live in `src/style.css` and `src/main.ts` if you want to customize further.
+
+## Develop
+
+```bash
+npm install
+npm run dev
+```
+
+Opens a local dev server with hot reload. `npm run typecheck` runs `tsc --noEmit` in strict mode.
+
+## Deploy
+
+This repo includes a GitHub Actions workflow (`.github/workflows/deploy.yml`) that builds and deploys `dist/` to GitHub Pages on every push to `main`. Enable Pages (Settings -> Pages -> Source: GitHub Actions) and it will publish automatically.
+
+You can equally deploy `dist/` to Netlify, Vercel, Cloudflare Pages, or any static host: run `npm run build` and upload the single `dist/index.html`.
 
 ## How the math works
 
@@ -45,21 +67,23 @@ The calculator assumes a standard U-100 insulin syringe, where 100 units equal 1
 - Units for a dose = (dose / concentration) x 100
 - Doses per vial = vial mg / dose
 
-No other assumptions or corrections are applied. The tool does the arithmetic; it does not evaluate whether a given dose is appropriate.
+No other assumptions or corrections are applied. The tool does the arithmetic; it does not evaluate whether a given dose is appropriate. The pure math lives in `src/calc.ts`, independent of the DOM, so it is easy to audit or reuse.
 
-## Reference data
+## Data and disclaimer
 
-`peptides.json` is a bundled, optional dataset of identity and handling reference values (molecular weight with PubChem CID citation, typical vial size, diluent type, reconstitution pH class, and storage handling) for a set of common research peptides. It contains no purity, potency, quality, or dosing data. Every molecular-weight value is cited to its PubChem entry. The dataset is licensed separately under CC BY 4.0 (see License below).
+`src/peptides.json` is a bundled, editable dataset of reference values for a set of common research peptides:
 
-## Disclaimer
+- **Identity and handling**: molecular weight (cited to PubChem where a single defined molecule exists), typical vial size, diluent type, reconstitution pH class, and storage handling. Contains no purity, potency, or quality claims.
+- **studyDose / studyNote**: a short summary of the dose range used in published studies for that peptide, with a one-line qualifier (e.g. whether an established human protocol exists).
+- **communityDose**: what peptide research forums discuss as commonly used amounts. This is forum-sourced, not from a study, and is never presented as a recommendation.
 
-This calculator is a research and education reference tool. It performs unit-conversion arithmetic (mg, ml, syringe units) and does not recommend, imply, or validate any dose. Nothing in this repository, the calculator, or the bundled dataset constitutes medical advice, and none of it is intended for use in dosing humans or animals. Consult qualified professionals and applicable regulations for anything beyond arithmetic.
-
-## Attribution
-
-Maintained by [peptidesdirect.io](https://peptidesdirect.io). The embedded widget carries a small "Powered by" link back to the project; please keep it intact when embedding.
+None of this is medical advice or a dosing recommendation. Most of the compounds listed have no established human protocol; where doses are shown, they describe what was used in a specific cited study or what a community discusses, not what anyone should use. The dataset is licensed separately under CC BY 4.0 (see License below) and can be freely edited when you fork this project.
 
 ## License
 
-- Code (`index.html`, this repository's tooling and documentation): [MIT](LICENSE)
-- Data (`peptides.json`): [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- Code (`src/`, `vite.config.ts`, this repository's tooling and documentation): [MIT](LICENSE)
+- Data (`src/peptides.json`): [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+## Attribution
+
+Powered by [peptidesdirect.io](https://peptidesdirect.io). The widget carries a small "Powered by" link back to the project; please keep it intact when embedding.
