@@ -13,7 +13,7 @@ body:
     id: repro
     attributes:
       label: Steps to reproduce
-      description: How can we see this ourselves? Include inputs (vial mg, diluent ml, dose) if relevant.
+      description: How can we see this ourselves? Include inputs (vial mg, water ml, target amount in mcg or mg, selected peptide) if relevant.
     validations:
       required: true
   - type: textarea

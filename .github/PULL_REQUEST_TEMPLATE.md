@@ -7,4 +7,4 @@
 - [ ] `npm run typecheck` passes
 - [ ] `npm run build` passes
 - [ ] Tested locally (`npm run dev` or `npm run preview`)
-- [ ] Any new/changed peptide data stays reference-only (no dosing recommendations; see CONTRIBUTING.md)
+- [ ] Any new/changed peptide data stays identity-only (molecular weight, PubChem CID, catalogue vial sizes, blend composition; nothing else)

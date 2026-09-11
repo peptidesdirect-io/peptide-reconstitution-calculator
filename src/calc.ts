@@ -1,63 +1,51 @@
 /**
- * Pure math for the interactive syringe reconstitution calculator. Ported
- * verbatim (same formulas, same behaviour) from peptidesdirect.io's
- * apps/web/src/lib/syringe-math.ts, kept dependency-free so it is trivially
- * unit-testable and so the drag/keyboard handlers, the tick renderer and the
- * readouts all derive from the exact same formulas (no drift between visuals
- * and numbers).
+ * Pure aliquot arithmetic for the peptide reconstitution calculator.
+ * Dependency-free and DOM-free, so it is trivially testable in isolation and
+ * the readouts all derive from the exact same formulas.
  *
- * Model: a U-100 insulin syringe, 100 graduations = 1 ml, 1 unit = 0.01 ml.
- * The plunger position is always a whole unit (0-100), snapped.
+ * Three formulas, nothing else:
+ *   concentration (mg/ml)   = vial mg / water ml
+ *   volume per aliquot (ml) = target amount mg / concentration
+ *   aliquots per vial       = floor(vial mg / target amount mg)
+ *
+ * Every helper returns 0 or null rather than a non-finite number, so nothing
+ * downstream can ever render "Infinity" or "NaN": extreme but valid inputs
+ * (a huge vial size over a tiny water volume, for instance) overflow silently
+ * here and the caller falls back to its empty state.
  */
 
-/** Clamp a units value to [0, maxUnits] and snap it to the nearest whole unit. */
-export function clampUnits(units: number, maxUnits: number): number {
-  if (Number.isNaN(units)) return 0;
-  return Math.max(0, Math.min(maxUnits, Math.round(units)));
-}
-
-/** mg/ml, or 0 if there is no water (avoids Infinity/NaN downstream). */
+/** mg/ml, or 0 if there is no vial content, no water, or the division does not
+ * yield a finite number. */
 export function concentrationMgPerMl(vialMg: number, waterMl: number): number {
+  if (!Number.isFinite(vialMg) || !Number.isFinite(waterMl)) return 0;
   if (!(vialMg > 0) || !(waterMl > 0)) return 0;
-  return vialMg / waterMl;
+  const value = vialMg / waterMl;
+  return Number.isFinite(value) ? value : 0;
 }
 
-/** A U-100 syringe barrel always tops out at 100 U (1 ml); if the vial holds
- * less than 1 ml of solvent, the usable draw is capped by what's actually in
- * the vial. */
-export function maxUnitsForWater(waterMl: number): number {
-  const w = waterMl > 0 ? waterMl : 1;
-  return Math.max(1, Math.min(100, Math.round(w * 100)));
-}
-
-export function unitsToMl(units: number): number {
-  return units / 100;
-}
-
-/** Amount of substance drawn at a given plunger position, in mg and mcg. */
-export function amountAtUnits(
-  units: number,
+/** Volume in ml that contains the target amount, or null if there is no
+ * concentration, no target amount to work from, or the division does not yield
+ * a finite number. */
+export function volumePerAliquotMl(
+  amountMg: number,
   concentrationMgPerMlValue: number,
-): { mg: number; mcg: number } {
-  const mg = unitsToMl(units) * concentrationMgPerMlValue;
-  return { mg, mcg: mg * 1000 };
+): number | null {
+  if (!Number.isFinite(amountMg) || !Number.isFinite(concentrationMgPerMlValue)) return null;
+  if (!(concentrationMgPerMlValue > 0) || !(amountMg > 0)) return null;
+  const value = amountMg / concentrationMgPerMlValue;
+  return Number.isFinite(value) ? value : null;
 }
 
-/** Where the plunger needs to sit to draw the target dose, in fractional
- * units (may exceed 100 if the dose needs more than 1 ml). Null if there is
- * no concentration or no dose to aim for. */
-export function targetUnits(doseMg: number, concentrationMgPerMlValue: number): number | null {
-  if (!(concentrationMgPerMlValue > 0) || !(doseMg > 0)) return null;
-  return (doseMg / concentrationMgPerMlValue) * 100;
+/** How many whole aliquots of amountMg the vial yields, or null if either
+ * value is missing or the result is not finite. */
+export function aliquotsPerVial(vialMg: number, amountMg: number): number | null {
+  if (!Number.isFinite(vialMg) || !Number.isFinite(amountMg)) return null;
+  if (!(amountMg > 0) || !(vialMg > 0)) return null;
+  const value = Math.floor(vialMg / amountMg);
+  return Number.isFinite(value) ? value : null;
 }
 
-/** How many full doses the vial yields. Null if there's no dose to divide by. */
-export function dosesPerVial(vialMg: number, doseMg: number): number | null {
-  if (!(doseMg > 0) || !(vialMg > 0)) return null;
-  return Math.floor(vialMg / doseMg);
-}
-
-export interface BlendDrawAmount {
+export interface BlendComponentAmount {
   name: string;
   mg: number;
   mcg: number;
@@ -65,25 +53,52 @@ export interface BlendDrawAmount {
   fraction: number;
 }
 
-/** Splits the current draw across a blend's components. Each component has
- * its own concentration (its share of the vial mg / the water ml); amount at
- * the current draw volume follows the same units-to-ml conversion as the
- * total. The sum of parts always equals the total. */
-export function blendAmountsAtUnits(
+/** Splits one aliquot across a blend's components. Each component has its own
+ * concentration (its share of the vial mg / the water ml); the amount it
+ * contributes to a given volume follows the same arithmetic as the total, so
+ * the sum of the parts always equals the aliquot amount. Returns an empty list
+ * if any input or any resulting amount is not finite. */
+export function blendAmountsPerAliquot(
   parts: { name: string; mg: number }[],
-  units: number,
+  volumeMl: number,
   waterMl: number,
   vialMg: number,
-): BlendDrawAmount[] {
-  const ml = unitsToMl(units);
-  return parts.map((p) => {
-    const partConcentration = waterMl > 0 ? p.mg / waterMl : 0;
-    const mg = ml * partConcentration;
+): BlendComponentAmount[] {
+  if (!Number.isFinite(volumeMl) || !Number.isFinite(waterMl) || !Number.isFinite(vialMg)) {
+    return [];
+  }
+  const amounts = parts.map((p) => {
+    const partConcentration = waterMl > 0 && Number.isFinite(p.mg) ? p.mg / waterMl : 0;
+    const mg = volumeMl * partConcentration;
     return {
       name: p.name,
       mg,
       mcg: mg * 1000,
-      fraction: vialMg > 0 ? p.mg / vialMg : 0,
+      fraction: vialMg > 0 && Number.isFinite(p.mg) ? p.mg / vialMg : 0,
     };
   });
+  return amounts.every((a) => Number.isFinite(a.mcg) && Number.isFinite(a.fraction)) ? amounts : [];
+}
+
+/** Rounds every part to a whole number and makes the rounded parts add up to the
+ * rounded total, by giving the whole rounding residual to the largest part.
+ * Rounding each part on its own does not add up: a 70 mg GLOW vial at 250 mcg
+ * per aliquot splits into 178.57 + 35.71 + 35.71, which displays as
+ * 179 + 36 + 36 = 251 mcg. Callers pass the values in whichever scale they show,
+ * so the numbers on screen are the numbers that sum. Returns null if any value
+ * or the total is not finite. */
+export function reconcileRoundedParts(values: number[], total: number): number[] | null {
+  if (!Number.isFinite(total) || !values.every((v) => Number.isFinite(v))) return null;
+  if (values.length === 0) return [];
+
+  const rounded = values.map((v) => Math.round(v));
+  const residual = Math.round(total) - rounded.reduce((sum, v) => sum + v, 0);
+  if (residual === 0) return rounded;
+
+  let largest = 0;
+  for (let i = 1; i < values.length; i += 1) {
+    if (values[i] > values[largest]) largest = i;
+  }
+  rounded[largest] += residual;
+  return rounded;
 }

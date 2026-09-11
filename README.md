@@ -5,7 +5,7 @@
 <h1 align="center">Peptide Reconstitution Calculator</h1>
 
 <p align="center">
-  A TypeScript + Vite calculator that converts vial mg, diluent volume and target dose into syringe units, injection volume, concentration and doses per vial. Builds to one self-contained, dependency-free static HTML file.
+  A TypeScript + Vite calculator that turns vial mg, bacteriostatic water in ml and a target amount per aliquot into concentration, volume per aliquot and aliquots per vial. Builds to one self-contained, dependency-free static HTML file.
 </p>
 
 <p align="center">
@@ -19,12 +19,24 @@
 </p>
 
 <p align="center">
-  <img src="assets/demo.gif" alt="Dragging the syringe plunger updates units, volume, concentration and doses per vial in real time" width="640" />
+  <img src="assets/screenshot.png" alt="The calculator with a vial size, a water volume and a target amount entered, showing concentration, volume per aliquot and aliquots per vial" width="640" />
 </p>
 
 ## What it is
 
-An interactive U-100 syringe: drag the plunger or use arrow keys to set a dose, and the tool works out units, injection volume, concentration and doses per vial from three inputs (vial content in mg, diluent volume in ml, target dose). It ships with a bundled reference dataset (`src/peptides.json`) of common research peptides: identity (PubChem-cited molecular weight), handling (diluent, pH class, storage) and dose references (see below).
+Three inputs, three outputs. You enter:
+
+1. the vial size in mg,
+2. how much bacteriostatic water you add in ml,
+3. the target amount per aliquot (mcg or mg).
+
+You get:
+
+1. the concentration in mg/ml,
+2. the volume per aliquot in ml,
+3. how many whole aliquots one vial yields.
+
+For a blend (GLOW, KLOW, the CJC-1295 / Ipamorelin mix and so on) the result also splits one aliquot across the blend's components, so you can see how much of each peptide a given volume contains. The bundled dataset (`src/peptides.json`) carries the identity of each peptide plus the vial sizes it is sold in, nothing else.
 
 Source code is TypeScript, built with Vite. There are no runtime dependencies: the production build is a single `dist/index.html` file with all JS and CSS inlined, so it can be self-hosted, embedded, or dropped onto any static host with zero configuration.
 
@@ -37,20 +49,22 @@ Source code is TypeScript, built with Vite. There are no runtime dependencies: t
 Drop this snippet into any page. It loads the single built file, no other scripts or stylesheets required.
 
 ```html
-<iframe src="https://calc.peptidesdirect.io" width="100%" height="720" style="border:0;max-width:920px" title="Peptide Reconstitution Calculator" loading="lazy"></iframe>
+<iframe src="https://calc.peptidesdirect.io" width="100%" height="640" style="border:0;max-width:920px" title="Peptide Reconstitution Calculator" loading="lazy"></iframe>
 ```
 
-You can also preselect a peptide via `?peptide=<slug>`, e.g. `https://calc.peptidesdirect.io/?peptide=bpc-157` (see `src/peptides.json` for the full list of slugs).
+## Preselect a peptide with `?peptide=`
+
+Append `?peptide=<slug>` to preselect an entry from the bundled dataset, e.g. `https://calc.peptidesdirect.io/?peptide=bpc-157`. That sets the dropdown and fills the vial field with the first catalogue vial size; the water volume keeps its default and the target amount stays empty. An unknown slug is ignored. The full list of slugs is in `src/peptides.json`.
 
 ## Fork and make it your own
 
 1. Fork this repository.
 2. `npm install`
-3. Edit `src/peptides.json`: change which peptides are listed, their vial sizes, diluent, pH class, storage notes, or dose references. The shape of each entry is documented in `src/peptides.ts` (the `Peptide` interface) and in [CONTRIBUTING.md](CONTRIBUTING.md).
+3. Edit `src/peptides.json`: change which peptides are listed, their vial sizes, or a blend composition. The shape of each entry is documented in `src/peptides.ts` (the `Peptide` interface) and in [CONTRIBUTING.md](CONTRIBUTING.md).
 4. `npm run build`
-5. Deploy the contents of `dist/` (it is a single self-contained `index.html`) to your own domain.
+5. Deploy the contents of `dist/` (a single self-contained `index.html`) to your own domain.
 
-Nothing else needs to change: the branding, colours, and copy live in `src/style.css` and `src/main.ts` if you want to customize further.
+Nothing else needs to change: branding, colours and copy live in `src/style.css` and `src/main.ts` if you want to customize further.
 
 ## Develop
 
@@ -69,23 +83,27 @@ You can equally deploy `dist/` to Netlify, Vercel, Cloudflare Pages, or any stat
 
 ## How the math works
 
-The calculator assumes a standard U-100 insulin syringe, where 100 units equal 1 ml (1 unit = 0.01 ml). All figures come from three inputs: vial content in mg, diluent (water) volume in ml, and the desired dose.
+Everything follows from the three values you type in:
 
 - Concentration (mg/ml) = vial mg / water ml
-- Units for a dose = (dose / concentration) x 100
-- Doses per vial = vial mg / dose
+- Volume per aliquot (ml) = target amount mg / concentration
+- Aliquots per vial = vial mg / target amount mg, rounded down
 
-No other assumptions or corrections are applied. The tool does the arithmetic; it does not evaluate whether a given dose is appropriate. The pure math lives in `src/calc.ts`, independent of the DOM, so it is easy to audit or reuse.
+No other assumptions or corrections are applied. The tool does the arithmetic; it does not evaluate whether a given amount is appropriate. The pure math lives in `src/calc.ts`, independent of the DOM, so it is easy to audit or reuse.
 
-## Data and disclaimer
+## Data
 
-`src/peptides.json` is a bundled, editable dataset of reference values for a set of common research peptides:
+`src/peptides.json` is a bundled, editable dataset. Per entry it holds:
 
-- **Identity and handling**: molecular weight (cited to PubChem where a single defined molecule exists), typical vial size, diluent type, reconstitution pH class, and storage handling. Contains no purity, potency, or quality claims.
-- **studyDose / studyNote**: a short summary of the dose range used in published studies for that peptide, with a one-line qualifier (e.g. whether an established human protocol exists).
-- **communityDose**: what peptide research forums discuss as commonly used amounts. This is forum-sourced, not from a study, and is never presented as a recommendation.
+- **Identity**: `molecularWeightDa` and `pubchemCid`, cited to the PubChem record they come from in the entry's `sources` array. Where a compound is not a single defined molecule (a thymus polypeptide fraction, an engineered analog without its own PubChem record, a blend), both fields are `null` and a `note` explains why, instead of an invented number.
+- **Catalogue vial sizes**: `typicalVialMg`, the sizes the peptide is sold in, ascending. The first entry is the smallest listed size, and for a blend it is the size the component composition is defined at.
+- **Blend composition**: `components`, the per-peptide mg split at the base vial size `typicalVialMg[0]`, scaled proportionally for any larger listed size.
 
-None of this is medical advice or a dosing recommendation. Most of the compounds listed have no established human protocol; where doses are shown, they describe what was used in a specific cited study or what a community discusses, not what anyone should use. The dataset is licensed separately under CC BY 4.0 (see License below) and can be freely edited when you fork this project.
+By design the dataset contains nothing else: no amounts to use, no water or handling recommendations, no purity, potency or quality claims. It is licensed separately under CC BY 4.0 (see License below) and can be freely edited when you fork this project.
+
+## Disclaimer
+
+For laboratory and research use only, not for human or veterinary use. This tool only performs arithmetic on the values you enter. It is not dosing advice and not a protocol.
 
 ## Contributing
 
@@ -93,7 +111,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the project layout, how to add or edi
 
 ## License
 
-- Code (`src/`, `vite.config.ts`, this repository's tooling and documentation): [MIT](LICENSE)
+- Code (`src/` except `src/peptides.json`, `vite.config.ts`, this repository's tooling and documentation): [MIT](LICENSE)
 - Data (`src/peptides.json`): [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
 ## Attribution

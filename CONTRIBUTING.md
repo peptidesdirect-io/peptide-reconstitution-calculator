@@ -14,11 +14,10 @@ TypeScript strict mode is on. There are no runtime dependencies; keep it that wa
 
 ## Project layout
 
-- `src/calc.ts` - pure syringe math (concentration, units, target dose, blend split). No DOM access, easy to unit-test.
-- `src/syringe.ts` - the interactive SVG syringe (drag, keyboard, tick marks, target marker).
+- `src/calc.ts` - the pure arithmetic (concentration, volume per aliquot, aliquots per vial, blend split). No DOM access, easy to test in isolation.
 - `src/peptides.ts` - the `Peptide` TypeScript interface plus `PEPTIDES`, loaded from `src/peptides.json`.
 - `src/peptides.json` - the editable reference dataset (see below).
-- `src/main.ts` - entry point: builds the UI, wires inputs, computes derived state, renders readouts.
+- `src/main.ts` - entry point: builds the UI, wires the inputs, computes derived state, renders the result.
 - `src/style.css` - all styling (light/dark, mobile-safe, no external fonts).
 
 ## Adding or editing a peptide
@@ -31,48 +30,38 @@ Edit `src/peptides.json`. Each entry keeps this field shape:
   "name": "Example Peptide",
   "molecularWeightDa": 1234.5,      // or null if there is no single defined molecule
   "pubchemCid": 1234567,            // or null; cite the exact PubChem CID you used
-  "typicalVialMg": [5, 10],         // vial sizes offered in the dropdown; [0] is the default fill
-  "diluent": "Bacteriostatic water (neutral)",
-  "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
-  "storage": "lyophilized: ... ; reconstituted: ...",
-  "plasmaHalfLife": null,           // optional, cited string or null
-  "studyDose": "10 pg/kg to 2 mg/kg (animal)",
-  "studyNote": "No established human protocol",
-  "communityDose": "250-500 mcg/day (SC)",
-  "doseBasis": "preclinical",       // "preclinical" | "human-trial" | "human-approved"
+  "typicalVialMg": [5, 10],         // catalogue vial sizes, ascending; [0] is the smallest
   "sources": [
     { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/1234567" }
-  ]
+  ],
+  "note": "Optional identity caveat, e.g. why a compound has no PubChem CID."
 }
 ```
 
-For a multi-peptide blend (like GLOW or KLOW), add a `components` array instead of `studyDose`/`communityDose`/`doseBasis` values (leave those as empty strings: a blend has no single-peptide study record):
+For a multi-peptide blend (like GLOW or KLOW), leave `molecularWeightDa` and `pubchemCid` as `null` and add a `components` array:
 
 ```jsonc
 {
   "slug": "example-blend",
+  "name": "Example Blend",
+  "molecularWeightDa": null,
+  "pubchemCid": null,
   "typicalVialMg": [70],
-  "studyDose": "",
-  "studyNote": "",
-  "communityDose": "",
-  "doseBasis": "",
   "components": [
     { "name": "Peptide A", "mg": 50, "pubchemCid": 1234567 },
     { "name": "Peptide B", "mg": 20, "pubchemCid": 7654321 }
-  ]
+  ],
+  "note": "Blend of two peptides; no single molecular weight."
 }
 ```
 
-`components` is defined at the recipe's base vial size, `typicalVialMg[0]`. If `typicalVialMg` lists a second, larger size, the app scales the recipe proportionally (see `blendComponentsForVial` in `src/peptides.ts`); do not add a second `components` array per vial size.
+`components` is defined at the composition's base vial size, `typicalVialMg[0]`, and the mg values must add up to it. If `typicalVialMg` lists a second, larger size, the app scales the composition proportionally (see `blendComponentsForVial` in `src/peptides.ts`); do not add a second `components` array per vial size.
 
-### Dose fields are reference only
+### What belongs in the dataset, and what does not
 
-`studyDose` / `studyNote` and `communityDose` are two different, clearly labelled things:
+The dataset answers two questions only: what is this compound, and which vial sizes exist. The identity fields are cited to the PubChem record they come from in the entry's `sources` array. If you cannot cite it, set the field to `null` and write a short `note` saying why, rather than filling in a plausible-looking number.
 
-- **studyDose**: what was actually used in a published study you can cite (a real dose from a real paper). Keep it short; the fuller citation trail lives at peptidesdirect.io/research/dosing, which the app links to.
-- **communityDose**: what peptide research forums discuss as commonly used amounts. This has no study basis and no named source. It is always rendered with a fixed, non-negotiable disclaimer in the UI ("Reference from peptide forums. Not a recommendation, no study basis, no established human protocol.") - do not remove or soften that disclaimer, and do not add a source or author name to a community dose.
-
-Neither field is ever a recommendation, dosing guidance, or medical advice. Do not invent numbers: every dose you add should trace back to a real study (studyDose) or a real, generic description of forum discussion (communityDose), not a guess.
+Anything beyond identity and vial sizes is out of scope and will not be merged: amounts to use, handling or water recommendations, purity or potency claims, health claims, or references to what anyone discusses online. The calculator is arithmetic on the values a person types in, and the dataset stays at that level.
 
 ## Pull requests
 

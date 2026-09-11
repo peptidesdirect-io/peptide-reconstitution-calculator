@@ -1,10 +1,10 @@
 {
   "_meta": {
-    "description": "Reference dataset for the open-source peptide reconstitution calculator. Identity fields (molecularWeightDa, pubchemCid) are taken from PubChem, cited per compound. Dose fields are a research reference only: studyDose/studyNote summarize doses used in published studies (see peptidesdirect.io/research/dosing for full citations); communityDose summarizes what is discussed in peptide forums.",
-    "compiled": "2026-07-08",
+    "description": "Reference dataset for the open-source peptide reconstitution calculator. Each entry carries identity fields (molecularWeightDa, pubchemCid) cited to the PubChem record they come from, the vial sizes listed in the peptidesdirect.io catalogue, and, for blends, the component composition at the base vial size typicalVialMg[0]. Identity and catalogue facts only.",
+    "compiled": "2026-09-11",
     "license": "CC BY 4.0",
     "source": "https://calc.peptidesdirect.io",
-    "disclaimer": "Reference only. Study doses = doses used in cited studies; community doses = what peptide forums discuss. Neither is a recommendation, dosing guidance or medical advice; most compounds have no established human protocol."
+    "disclaimer": "For laboratory and research use only, not for human or veterinary use. The dataset states what a compound is and which vial sizes exist, nothing about how to handle or use it."
   },
   "peptides": [
     {
@@ -12,17 +12,15 @@
       "name": "BPC-157",
       "molecularWeightDa": 1419.5,
       "pubchemCid": 9941957,
-      "typicalVialMg": [5, 10],
-      "diluent": "Bacteriostatic water (neutral)",
-      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
-      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
-      "plasmaHalfLife": null,
-      "studyDose": "10 pg/kg to 2 mg/kg (animal)",
-      "studyNote": "No established human protocol",
-      "communityDose": "250-500 mcg/day (SC)",
-      "doseBasis": "preclinical",
+      "typicalVialMg": [
+        10,
+        20
+      ],
       "sources": [
-        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/9941957" }
+        {
+          "field": "molecularWeightDa",
+          "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/9941957"
+        }
       ]
     },
     {
@@ -30,17 +28,14 @@
       "name": "TB-500",
       "molecularWeightDa": 4963,
       "pubchemCid": 45382195,
-      "typicalVialMg": [5, 10],
-      "diluent": "Bacteriostatic water (neutral)",
-      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
-      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
-      "plasmaHalfLife": null,
-      "studyDose": "1.6 mg/kg/day to 6 mg/kg (animal)",
-      "studyNote": "No established human protocol",
-      "communityDose": "4-8 mg/week (SC)",
-      "doseBasis": "preclinical",
+      "typicalVialMg": [
+        10
+      ],
       "sources": [
-        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/45382195" }
+        {
+          "field": "molecularWeightDa",
+          "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/45382195"
+        }
       ]
     },
     {
@@ -48,17 +43,15 @@
       "name": "GHK-Cu",
       "molecularWeightDa": 400.9,
       "pubchemCid": 139035031,
-      "typicalVialMg": [50, 100],
-      "diluent": "Bacteriostatic water (do not acidify; blue colour is normal)",
-      "reconstitutionPhClass": "copper complex, neutral, do not acidify",
-      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
-      "plasmaHalfLife": null,
-      "studyDose": "0.2 to 20 mg/kg/day (animal)",
-      "studyNote": "No established human protocol",
-      "communityDose": "1-2 mg/day (SC)",
-      "doseBasis": "preclinical",
+      "typicalVialMg": [
+        50,
+        100
+      ],
       "sources": [
-        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/139035031" }
+        {
+          "field": "molecularWeightDa",
+          "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/139035031"
+        }
       ]
     },
     {
@@ -66,17 +59,14 @@
       "name": "Ipamorelin",
       "molecularWeightDa": 711.9,
       "pubchemCid": 9831659,
-      "typicalVialMg": [5, 10],
-      "diluent": "Bacteriostatic water (neutral)",
-      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
-      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
-      "plasmaHalfLife": null,
-      "studyDose": "1.6 mcg/kg to 1.6 mg/kg/day (animal)",
-      "studyNote": "No established human protocol",
-      "communityDose": "200-300 mcg/day (SC)",
-      "doseBasis": "human-trial",
+      "typicalVialMg": [
+        10
+      ],
       "sources": [
-        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/9831659" }
+        {
+          "field": "molecularWeightDa",
+          "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/9831659"
+        }
       ]
     },
     {
@@ -84,17 +74,14 @@
       "name": "CJC-1295 (no DAC)",
       "molecularWeightDa": 3367.9,
       "pubchemCid": 56841945,
-      "typicalVialMg": [5, 10],
-      "diluent": "Bacteriostatic water (neutral)",
-      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
-      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
-      "plasmaHalfLife": null,
-      "studyDose": "30 to 90 mcg/kg (human trials)",
-      "studyNote": "No established human protocol",
-      "communityDose": "100-200 mcg/day (no-DAC) or 1-2 mg/week (DAC), SC",
-      "doseBasis": "human-trial",
+      "typicalVialMg": [
+        10
+      ],
       "sources": [
-        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/56841945" }
+        {
+          "field": "molecularWeightDa",
+          "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/56841945"
+        }
       ]
     },
     {
@@ -102,17 +89,14 @@
       "name": "Sermorelin",
       "molecularWeightDa": 3357.9,
       "pubchemCid": 16132413,
-      "typicalVialMg": [5],
-      "diluent": "Bacteriostatic water (neutral)",
-      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
-      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
-      "plasmaHalfLife": null,
-      "studyDose": "1 to 60 mcg/kg/day (human trials)",
-      "studyNote": "Approved human dose exists",
-      "communityDose": "200-300 mcg (SC, evening)",
-      "doseBasis": "human-approved",
+      "typicalVialMg": [
+        10
+      ],
       "sources": [
-        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/16132413" }
+        {
+          "field": "molecularWeightDa",
+          "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/16132413"
+        }
       ]
     },
     {
@@ -120,18 +104,14 @@
       "name": "Tesamorelin",
       "molecularWeightDa": 5136,
       "pubchemCid": 16137828,
-      "typicalVialMg": [5, 10],
-      "diluent": "Bacteriostatic water (neutral)",
-      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
-      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
-      "plasmaHalfLife": "~8 min (healthy subjects; EGRIFTA SV FDA label)",
-      "studyDose": "2 mg/day to 600 mcg/kg (animal + human)",
-      "studyNote": "Approved human dose exists",
-      "communityDose": "1-2 mg/day (SC)",
-      "doseBasis": "human-approved",
+      "typicalVialMg": [
+        10
+      ],
       "sources": [
-        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/16137828" },
-        { "field": "plasmaHalfLife", "ref": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3d783378-b02d-4f19-99dd-0fc91a042224" }
+        {
+          "field": "molecularWeightDa",
+          "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/16137828"
+        }
       ]
     },
     {
@@ -139,17 +119,14 @@
       "name": "Semax",
       "molecularWeightDa": 813.9,
       "pubchemCid": 9811102,
-      "typicalVialMg": [10, 30],
-      "diluent": "Bacteriostatic water (neutral)",
-      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
-      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
-      "plasmaHalfLife": null,
-      "studyDose": "0.045 to 0.25 mg/kg (animal)",
-      "studyNote": "No established human protocol",
-      "communityDose": "300-600 mcg/day (intranasal)",
-      "doseBasis": "human-trial",
+      "typicalVialMg": [
+        30
+      ],
       "sources": [
-        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/9811102" }
+        {
+          "field": "molecularWeightDa",
+          "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/9811102"
+        }
       ]
     },
     {
@@ -157,17 +134,14 @@
       "name": "Selank",
       "molecularWeightDa": 751.9,
       "pubchemCid": 11765600,
-      "typicalVialMg": [10],
-      "diluent": "Bacteriostatic water (neutral)",
-      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
-      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
-      "plasmaHalfLife": null,
-      "studyDose": "0.3 mg/kg (animal)",
-      "studyNote": "No established human protocol",
-      "communityDose": "250-500 mcg/day (intranasal)",
-      "doseBasis": "preclinical",
+      "typicalVialMg": [
+        10
+      ],
       "sources": [
-        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/11765600" }
+        {
+          "field": "molecularWeightDa",
+          "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/11765600"
+        }
       ]
     },
     {
@@ -175,17 +149,15 @@
       "name": "MOTS-c",
       "molecularWeightDa": 2174.6,
       "pubchemCid": 146675088,
-      "typicalVialMg": [10],
-      "diluent": "Bacteriostatic water (neutral)",
-      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
-      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
-      "plasmaHalfLife": null,
-      "studyDose": "0.5 to 15 mg/kg (animal)",
-      "studyNote": "No established human protocol",
-      "communityDose": "5-10 mg/week (SC)",
-      "doseBasis": "preclinical",
+      "typicalVialMg": [
+        10,
+        40
+      ],
       "sources": [
-        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/146675088" }
+        {
+          "field": "molecularWeightDa",
+          "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/146675088"
+        }
       ]
     },
     {
@@ -193,17 +165,15 @@
       "name": "Epitalon",
       "molecularWeightDa": 390.35,
       "pubchemCid": 219042,
-      "typicalVialMg": [10, 50],
-      "diluent": "Bacteriostatic water (neutral)",
-      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
-      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
-      "plasmaHalfLife": null,
-      "studyDose": "0.4 to 40 mcg/kg (animal)",
-      "studyNote": "No established human protocol",
-      "communityDose": "5-10 mg/day (SC)",
-      "doseBasis": "preclinical",
+      "typicalVialMg": [
+        10,
+        50
+      ],
       "sources": [
-        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/219042" }
+        {
+          "field": "molecularWeightDa",
+          "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/219042"
+        }
       ]
     },
     {
@@ -211,17 +181,15 @@
       "name": "NAD+",
       "molecularWeightDa": 663.4,
       "pubchemCid": 5892,
-      "typicalVialMg": [500, 1000],
-      "diluent": "Bacteriostatic water (neutral)",
-      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
-      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
-      "plasmaHalfLife": null,
-      "studyDose": "5 mg/kg to 750 mg total (animal + human)",
-      "studyNote": "No established human protocol",
-      "communityDose": "50-100 mg (SC, 2-3x/week)",
-      "doseBasis": "human-trial",
+      "typicalVialMg": [
+        500,
+        1000
+      ],
       "sources": [
-        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/5892" }
+        {
+          "field": "molecularWeightDa",
+          "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/5892"
+        }
       ]
     },
     {
@@ -229,17 +197,15 @@
       "name": "SS-31",
       "molecularWeightDa": 639.8,
       "pubchemCid": 11764719,
-      "typicalVialMg": [10, 50],
-      "diluent": "Bacteriostatic water (neutral)",
-      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
-      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
-      "plasmaHalfLife": null,
-      "studyDose": "0.005 to 0.25 mg/kg/h (human trials)",
-      "studyNote": "No established human protocol",
-      "communityDose": "1-2 (up to 5-10) mg/day (SC)",
-      "doseBasis": "human-trial",
+      "typicalVialMg": [
+        10,
+        50
+      ],
       "sources": [
-        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/11764719" }
+        {
+          "field": "molecularWeightDa",
+          "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/11764719"
+        }
       ]
     },
     {
@@ -247,17 +213,14 @@
       "name": "KPV",
       "molecularWeightDa": 342.43,
       "pubchemCid": 125672,
-      "typicalVialMg": [10],
-      "diluent": "Bacteriostatic water (neutral)",
-      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
-      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
-      "plasmaHalfLife": null,
-      "studyDose": "16 mcg/kg to 2.5 mg/kg (animal)",
-      "studyNote": "No established human protocol",
-      "communityDose": "250-500 mcg/day (SC)",
-      "doseBasis": "preclinical",
+      "typicalVialMg": [
+        10
+      ],
       "sources": [
-        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/125672" }
+        {
+          "field": "molecularWeightDa",
+          "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/125672"
+        }
       ]
     },
     {
@@ -265,17 +228,14 @@
       "name": "LL-37",
       "molecularWeightDa": 4493,
       "pubchemCid": 16198951,
-      "typicalVialMg": [5],
-      "diluent": "Bacteriostatic water (neutral)",
-      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
-      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
-      "plasmaHalfLife": null,
-      "studyDose": "under 10 mcg/mL to 3.2 mg/mL (in vitro / human topical)",
-      "studyNote": "No established human protocol",
-      "communityDose": "100-300 mcg/day (SC)",
-      "doseBasis": "preclinical",
+      "typicalVialMg": [
+        5
+      ],
       "sources": [
-        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/16198951" }
+        {
+          "field": "molecularWeightDa",
+          "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/16198951"
+        }
       ]
     },
     {
@@ -283,17 +243,14 @@
       "name": "Thymosin Alpha-1",
       "molecularWeightDa": 3108.3,
       "pubchemCid": 16130571,
-      "typicalVialMg": [5, 10],
-      "diluent": "Bacteriostatic water (neutral)",
-      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
-      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
-      "plasmaHalfLife": null,
-      "studyDose": "900 mcg/m2 to 1.6 mg per dose (human trials)",
-      "studyNote": "Approved human dose exists",
-      "communityDose": "1.5-1.6 mg (SC)",
-      "doseBasis": "human-approved",
+      "typicalVialMg": [
+        10
+      ],
       "sources": [
-        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/16130571" }
+        {
+          "field": "molecularWeightDa",
+          "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/16130571"
+        }
       ]
     },
     {
@@ -301,16 +258,9 @@
       "name": "Thymalin",
       "molecularWeightDa": null,
       "pubchemCid": null,
-      "typicalVialMg": [10],
-      "diluent": "Bacteriostatic water (neutral)",
-      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
-      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
-      "plasmaHalfLife": null,
-      "studyDose": "10 mg/day (human trials)",
-      "studyNote": "No established human protocol",
-      "communityDose": "10 mg/day (IM or SC)",
-      "doseBasis": "human-trial",
-      "sources": [],
+      "typicalVialMg": [
+        10
+      ],
       "note": "Thymalin is a thymus polypeptide fraction, not a single defined molecule, so it has no single PubChem CID and no single molecular weight. Do not confuse with thymulin (nonathymulin, PubChem CID 3085284), which is a different compound."
     },
     {
@@ -318,17 +268,14 @@
       "name": "DSIP",
       "molecularWeightDa": 848.8,
       "pubchemCid": 68816,
-      "typicalVialMg": [5, 10],
-      "diluent": "Bacteriostatic water (neutral)",
-      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
-      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
-      "plasmaHalfLife": null,
-      "studyDose": "21 mcg/kg to 2 mg absolute (animal + human)",
-      "studyNote": "No established human protocol",
-      "communityDose": "100-300 mcg (SC, evening)",
-      "doseBasis": "human-trial",
+      "typicalVialMg": [
+        10
+      ],
       "sources": [
-        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/68816" }
+        {
+          "field": "molecularWeightDa",
+          "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/68816"
+        }
       ]
     },
     {
@@ -336,17 +283,14 @@
       "name": "Melanotan-2",
       "molecularWeightDa": 1024.2,
       "pubchemCid": 92432,
-      "typicalVialMg": [10],
-      "diluent": "Bacteriostatic water (neutral)",
-      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
-      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
-      "plasmaHalfLife": null,
-      "studyDose": "0.01 mg/kg to 6 mg (human trials)",
-      "studyNote": "No established human protocol",
-      "communityDose": "250-500 mcg/day (SC)",
-      "doseBasis": "human-trial",
+      "typicalVialMg": [
+        10
+      ],
       "sources": [
-        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/92432" }
+        {
+          "field": "molecularWeightDa",
+          "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/92432"
+        }
       ]
     },
     {
@@ -354,18 +298,19 @@
       "name": "Retatrutide",
       "molecularWeightDa": 4731,
       "pubchemCid": 171390338,
-      "typicalVialMg": [5, 10, 15],
-      "diluent": "Bacteriostatic water, near-neutral (test water pH; acidic water is the top cause of a milky vial)",
-      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
-      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
-      "plasmaHalfLife": "~6 days (Jastreboff et al., NEJM 2023)",
-      "studyDose": "0.5 to 12 mg/week (human trials)",
-      "studyNote": "No established human protocol",
-      "communityDose": "1-2 titrating up to 12 mg/week (SC)",
-      "doseBasis": "human-trial",
+      "typicalVialMg": [
+        5,
+        10,
+        15,
+        20,
+        30,
+        50
+      ],
       "sources": [
-        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/171390338" },
-        { "field": "plasmaHalfLife", "ref": "https://pubmed.ncbi.nlm.nih.gov/37366315/" }
+        {
+          "field": "molecularWeightDa",
+          "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/171390338"
+        }
       ]
     },
     {
@@ -373,18 +318,14 @@
       "name": "Cagrilintide",
       "molecularWeightDa": 4409,
       "pubchemCid": 171397054,
-      "typicalVialMg": [5, 10],
-      "diluent": "Acetic-acid water then top up with bacteriostatic water (amylin analog, acidic ~pH 4)",
-      "reconstitutionPhClass": "acidic ~4 (amylin analog, acetic-acid water)",
-      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
-      "plasmaHalfLife": "~159-195 h, about one week (Enebo et al., Lancet 2021)",
-      "studyDose": "0.16 to 4.5 mg/week (human trials)",
-      "studyNote": "No established human protocol",
-      "communityDose": "0.6-2.4 mg/week (SC)",
-      "doseBasis": "human-trial",
+      "typicalVialMg": [
+        10
+      ],
       "sources": [
-        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/171397054" },
-        { "field": "plasmaHalfLife", "ref": "https://pubmed.ncbi.nlm.nih.gov/33894838/" }
+        {
+          "field": "molecularWeightDa",
+          "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/171397054"
+        }
       ]
     },
     {
@@ -392,17 +333,15 @@
       "name": "AOD-9604",
       "molecularWeightDa": 1815.1,
       "pubchemCid": 71300630,
-      "typicalVialMg": [5],
-      "diluent": "Bacteriostatic water (neutral)",
-      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
-      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
-      "plasmaHalfLife": null,
-      "studyDose": "0.25 mg per knee to 0.5 mg/kg/day (animal)",
-      "studyNote": "No established human protocol",
-      "communityDose": "300-500 mcg/day (SC)",
-      "doseBasis": "preclinical",
+      "typicalVialMg": [
+        5,
+        10
+      ],
       "sources": [
-        { "field": "molecularWeightDa", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/71300630" }
+        {
+          "field": "molecularWeightDa",
+          "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/71300630"
+        }
       ]
     },
     {
@@ -410,87 +349,147 @@
       "name": "IGF-1 LR3",
       "molecularWeightDa": null,
       "pubchemCid": null,
-      "typicalVialMg": [1],
-      "diluent": "Dilute acetic acid, then bacteriostatic water (acetate-buffered, acidic ~pH 3-4)",
-      "reconstitutionPhClass": "acidic ~3-4 (acetate-buffered, e.g. IGF analog)",
-      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
-      "plasmaHalfLife": null,
-      "studyDose": "0.18 to 2.5 mg/kg/day (animal)",
-      "studyNote": "No established human protocol",
-      "communityDose": "20-50 mcg/day (SC or IM)",
-      "doseBasis": "preclinical",
-      "sources": [],
+      "typicalVialMg": [
+        1
+      ],
       "note": "IGF-1 LR3 (Long R3 IGF-1) is an 83-residue engineered analog of insulin-like growth factor 1 with an N-terminal extension and an Arg3 substitution. It has no single clean PubChem CID, so molecular weight is left uncited rather than invented."
+    },
+    {
+      "slug": "pinealon",
+      "name": "Pinealon",
+      "molecularWeightDa": 418.4,
+      "pubchemCid": 10273502,
+      "typicalVialMg": [
+        10
+      ],
+      "sources": [
+        {
+          "field": "molecularWeightDa",
+          "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/10273502"
+        },
+        {
+          "field": "pubchemCid",
+          "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/10273502"
+        }
+      ],
+      "note": "Pinealon is the tripeptide Glu-Asp-Arg (EDR); PubChem CID 10273502 lists \"pinealon\" and \"Glu-Asp-Arg\" among its synonyms."
+    },
+    {
+      "slug": "pt-141",
+      "name": "PT-141 (Bremelanotide)",
+      "molecularWeightDa": 1025.2,
+      "pubchemCid": 9941379,
+      "typicalVialMg": [
+        10
+      ],
+      "sources": [
+        {
+          "field": "molecularWeightDa",
+          "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/9941379"
+        },
+        {
+          "field": "pubchemCid",
+          "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/9941379"
+        }
+      ],
+      "note": "Values are for the free base (PubChem CID 9941379, synonyms \"Bremelanotide\", \"PT 141\", \"PT-141 FREE BASE\"); the acetate salt is a separate PubChem record (CID 91971505, 1085.2 Da)."
     },
     {
       "slug": "glow",
       "name": "GLOW (GHK-Cu / BPC-157 / TB-500)",
       "molecularWeightDa": null,
       "pubchemCid": null,
-      "typicalVialMg": [70],
-      "diluent": "Bacteriostatic water (do not acidify)",
-      "reconstitutionPhClass": "copper complex, neutral, do not acidify",
-      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
-      "plasmaHalfLife": null,
-      "studyDose": "",
-      "studyNote": "",
-      "communityDose": "",
-      "doseBasis": "",
+      "typicalVialMg": [
+        70
+      ],
       "components": [
-        { "name": "GHK-Cu", "mg": 50, "pubchemCid": 139035031 },
-        { "name": "BPC-157", "mg": 10, "pubchemCid": 9941957 },
-        { "name": "TB-500", "mg": 10, "pubchemCid": 45382195 }
+        {
+          "name": "GHK-Cu",
+          "mg": 50,
+          "pubchemCid": 139035031
+        },
+        {
+          "name": "BPC-157",
+          "mg": 10,
+          "pubchemCid": 9941957
+        },
+        {
+          "name": "TB-500",
+          "mg": 10,
+          "pubchemCid": 45382195
+        }
       ],
       "sources": [
-        { "field": "components", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/139035031" }
+        {
+          "field": "components",
+          "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/139035031"
+        }
       ],
-      "note": "Blend of three peptides; no single molecular weight. Contains the GHK copper complex, so do not acidify."
+      "note": "Blend of three peptides; no single molecular weight."
     },
     {
       "slug": "klow",
       "name": "KLOW (GHK-Cu / BPC-157 / TB-500 / KPV)",
       "molecularWeightDa": null,
       "pubchemCid": null,
-      "typicalVialMg": [80],
-      "diluent": "Bacteriostatic water (do not acidify)",
-      "reconstitutionPhClass": "copper complex, neutral, do not acidify",
-      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
-      "plasmaHalfLife": null,
-      "studyDose": "",
-      "studyNote": "",
-      "communityDose": "",
-      "doseBasis": "",
+      "typicalVialMg": [
+        80
+      ],
       "components": [
-        { "name": "GHK-Cu", "mg": 50, "pubchemCid": 139035031 },
-        { "name": "BPC-157", "mg": 10, "pubchemCid": 9941957 },
-        { "name": "TB-500", "mg": 10, "pubchemCid": 45382195 },
-        { "name": "KPV", "mg": 10, "pubchemCid": 125672 }
+        {
+          "name": "GHK-Cu",
+          "mg": 50,
+          "pubchemCid": 139035031
+        },
+        {
+          "name": "BPC-157",
+          "mg": 10,
+          "pubchemCid": 9941957
+        },
+        {
+          "name": "TB-500",
+          "mg": 10,
+          "pubchemCid": 45382195
+        },
+        {
+          "name": "KPV",
+          "mg": 10,
+          "pubchemCid": 125672
+        }
       ],
       "sources": [
-        { "field": "components", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/139035031" }
+        {
+          "field": "components",
+          "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/139035031"
+        }
       ],
-      "note": "Blend of four peptides; no single molecular weight. Contains the GHK copper complex, so do not acidify."
+      "note": "Blend of four peptides; no single molecular weight."
     },
     {
       "slug": "cjc-1295-ipamorelin-mix",
       "name": "CJC-1295 / Ipamorelin",
       "molecularWeightDa": null,
       "pubchemCid": null,
-      "typicalVialMg": [10],
-      "diluent": "Bacteriostatic water (neutral)",
-      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
-      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
-      "plasmaHalfLife": null,
-      "studyDose": "",
-      "studyNote": "",
-      "communityDose": "",
-      "doseBasis": "",
+      "typicalVialMg": [
+        10
+      ],
       "components": [
-        { "name": "CJC-1295 (no DAC)", "mg": 5, "pubchemCid": 56841945 },
-        { "name": "Ipamorelin", "mg": 5, "pubchemCid": 9831659 }
+        {
+          "name": "CJC-1295 (no DAC)",
+          "mg": 5,
+          "pubchemCid": 56841945
+        },
+        {
+          "name": "Ipamorelin",
+          "mg": 5,
+          "pubchemCid": 9831659
+        }
       ],
       "sources": [
-        { "field": "components", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/56841945" }
+        {
+          "field": "components",
+          "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/56841945"
+        }
       ],
       "note": "Blend of two peptides; no single molecular weight."
     },
@@ -499,21 +498,27 @@
       "name": "BPC-157 / TB-500",
       "molecularWeightDa": null,
       "pubchemCid": null,
-      "typicalVialMg": [10, 20],
-      "diluent": "Bacteriostatic water (neutral)",
-      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
-      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
-      "plasmaHalfLife": null,
-      "studyDose": "",
-      "studyNote": "",
-      "communityDose": "",
-      "doseBasis": "",
+      "typicalVialMg": [
+        10,
+        20
+      ],
       "components": [
-        { "name": "BPC-157", "mg": 5, "pubchemCid": 9941957 },
-        { "name": "TB-500", "mg": 5, "pubchemCid": 45382195 }
+        {
+          "name": "BPC-157",
+          "mg": 5,
+          "pubchemCid": 9941957
+        },
+        {
+          "name": "TB-500",
+          "mg": 5,
+          "pubchemCid": 45382195
+        }
       ],
       "sources": [
-        { "field": "components", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/9941957" }
+        {
+          "field": "components",
+          "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/9941957"
+        }
       ],
       "note": "Blend of two peptides in a 1:1 ratio (5 mg / 5 mg at 10 mg total, 10 mg / 10 mg at 20 mg total); no single molecular weight."
     },
@@ -522,21 +527,26 @@
       "name": "Semax / Selank",
       "molecularWeightDa": null,
       "pubchemCid": null,
-      "typicalVialMg": [20],
-      "diluent": "Bacteriostatic water (neutral)",
-      "reconstitutionPhClass": "neutral ~5.7 (bacteriostatic water)",
-      "storage": "lyophilized: -20C long-term / 2-8C fridge short-term, keep sealed and protected from light; reconstituted: 2-8C fridge, use within ~2-4 weeks",
-      "plasmaHalfLife": null,
-      "studyDose": "",
-      "studyNote": "",
-      "communityDose": "",
-      "doseBasis": "",
+      "typicalVialMg": [
+        20
+      ],
       "components": [
-        { "name": "Semax", "mg": 10, "pubchemCid": 9811102 },
-        { "name": "Selank", "mg": 10, "pubchemCid": 11765600 }
+        {
+          "name": "Semax",
+          "mg": 10,
+          "pubchemCid": 9811102
+        },
+        {
+          "name": "Selank",
+          "mg": 10,
+          "pubchemCid": 11765600
+        }
       ],
       "sources": [
-        { "field": "components", "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/9811102" }
+        {
+          "field": "components",
+          "ref": "https://pubchem.ncbi.nlm.nih.gov/compound/9811102"
+        }
       ],
       "note": "Blend of two peptides; no single molecular weight."
     }

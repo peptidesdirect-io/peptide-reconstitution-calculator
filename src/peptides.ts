@@ -1,13 +1,13 @@
 import data from "./peptides.json";
 
-/** A citation for a single identity field (PubChem, DailyMed, PubMed, ...). */
+/** A citation for a single identity field (PubChem). */
 export interface PeptideSource {
   field: string;
   ref: string;
 }
 
-/** One component of a multi-peptide blend (GLOW, KLOW, ...), at the recipe's
- * base vial size (typicalVialMg[0]). Scale to any other listed vial size with
+/** One component of a multi-peptide blend (GLOW, KLOW, ...), at the
+ * composition's base vial size (typicalVialMg[0]). Scale to any other listed vial size with
  * blendComponentsForVial below. */
 export interface PeptideComponent {
   name: string;
@@ -22,22 +22,11 @@ export interface Peptide {
    * single defined molecule (see `note`). */
   molecularWeightDa: number | null;
   pubchemCid: number | null;
+  /** Vial sizes in mg listed in the peptidesdirect.io catalogue, ascending;
+   * [0] is the smallest listed size and, for blends, the size the component
+   * composition is defined at. */
   typicalVialMg: number[];
-  diluent: string;
-  reconstitutionPhClass: string;
-  storage: string;
-  plasmaHalfLife?: string | null;
-  /** Short summary of the dose range used in published studies. Empty for
-   * blends, which have no single-peptide study record. Reference only. */
-  studyDose: string;
-  /** One-line qualifier for studyDose, e.g. "No established human protocol". */
-  studyNote: string;
-  /** Short summary of what peptide forums discuss. Reference/forum-sourced
-   * only, never a recommendation. Empty for blends. */
-  communityDose: string;
-  /** "preclinical" | "human-trial" | "human-approved" | "" (blends). */
-  doseBasis: string;
-  /** Present only for blends (GLOW, KLOW, ...): the recipe at typicalVialMg[0]. */
+  /** Present only for blends (GLOW, KLOW, ...): the composition at typicalVialMg[0]. */
   components?: PeptideComponent[];
   sources?: PeptideSource[];
   /** Free-text identity caveat, e.g. why a compound has no PubChem CID. */
@@ -53,9 +42,9 @@ const dataset = data as PeptideDataset;
 
 export const PEPTIDES: Peptide[] = dataset.peptides;
 
-/** Scales a blend's component recipe (defined at its base typicalVialMg[0])
- * to whichever vial size is currently selected. Returns null for
- * non-blend peptides or if the base recipe has no usable total. */
+/** Scales a blend's component composition (defined at its base typicalVialMg[0])
+ * to whichever vial size is currently entered. Returns null for
+ * non-blend peptides or if the base composition has no usable total. */
 export function blendComponentsForVial(
   peptide: Peptide,
   vialMg: number,

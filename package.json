@@ -1,15 +1,17 @@
 {
   "name": "@peptidesdirect-io/peptide-reconstitution-calculator",
-  "version": "1.0.0",
-  "description": "Self-contained, dependency-free peptide reconstitution and syringe-dose calculator. Builds to a single static HTML file.",
+  "version": "2.0.0",
+  "description": "Self-contained, dependency-free peptide reconstitution calculator: vial mg and bacteriostatic water to concentration, volume per aliquot and aliquots per vial. Builds to a single static HTML file.",
   "keywords": [
     "peptide",
     "reconstitution",
     "calculator",
-    "syringe",
-    "dosing-math",
+    "concentration",
+    "aliquot",
     "bacteriostatic-water",
-    "biohacking"
+    "laboratory",
+    "typescript",
+    "vite"
   ],
   "license": "MIT",
   "homepage": "https://calc.peptidesdirect.io",
